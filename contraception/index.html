@@ -1169,8 +1169,10 @@ document.getElementById('calculate').addEventListener('click', () => {
   render(p, results);
   // On narrow screens, scroll results into view
   if (window.innerWidth < 980) {
-    document.getElementById('results-panel').scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }
+   // Scroll to top of results panel reliably (works on desktop and mobile)
+  const target = document.getElementById('results-panel');
+  const targetTop = target.getBoundingClientRect().top + window.pageYOffset - 20;
+  window.scrollTo({ top: targetTop, behavior: 'smooth' });
 });
 
 document.getElementById('reset').addEventListener('click', () => {
