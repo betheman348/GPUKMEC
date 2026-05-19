@@ -1174,12 +1174,24 @@ document.getElementById('calculate').addEventListener('click', () => {
 });
 
 document.getElementById('reset').addEventListener('click', () => {
-  document.getElementById('patient-form').reset();
+  const form = document.getElementById('patient-form');
+
+  // Explicitly clear every input — more reliable than form.reset() on mobile
+  form.querySelectorAll('input[type="number"]').forEach(el => { el.value = ''; });
+  form.querySelectorAll('input[type="checkbox"]').forEach(el => { el.checked = false; });
+  form.querySelectorAll('select').forEach(el => { el.selectedIndex = 0; });
+
+  // Reset results panel
   document.getElementById('results-content').innerHTML = `
     <div class="results-empty">
       <div class="results-empty-icon">∅</div>
       <p>Enter patient factors and press <strong>Calculate eligibility</strong> to see the UKMEC summary.</p>
     </div>`;
+
+  // Scroll to top of form on mobile
+  if (window.innerWidth < 980) {
+    document.querySelector('.input-panel').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
 });
 
 // Allow Enter key submission
