@@ -1167,9 +1167,7 @@ document.getElementById('calculate').addEventListener('click', () => {
   const p = getData();
   const results = evaluate(p);
   render(p, results);
-  // On narrow screens, scroll results into view
-  if (window.innerWidth < 980) {
-   // Scroll to top of results panel reliably (works on desktop and mobile)
+  // Scroll to top of eligibility summary (works on desktop and mobile)
   const target = document.getElementById('results-panel');
   const targetTop = target.getBoundingClientRect().top + window.pageYOffset - 20;
   window.scrollTo({ top: targetTop, behavior: 'smooth' });
@@ -1177,23 +1175,20 @@ document.getElementById('calculate').addEventListener('click', () => {
 
 document.getElementById('reset').addEventListener('click', () => {
   const form = document.getElementById('patient-form');
-
   // Explicitly clear every input — more reliable than form.reset() on mobile
   form.querySelectorAll('input[type="number"]').forEach(el => { el.value = ''; });
   form.querySelectorAll('input[type="checkbox"]').forEach(el => { el.checked = false; });
   form.querySelectorAll('select').forEach(el => { el.selectedIndex = 0; });
-
   // Reset results panel
   document.getElementById('results-content').innerHTML = `
     <div class="results-empty">
       <div class="results-empty-icon">∅</div>
       <p>Enter patient factors and press <strong>Calculate eligibility</strong> to see the UKMEC summary.</p>
     </div>`;
-
-  // Scroll to top of form on mobile
-  if (window.innerWidth < 980) {
-    document.querySelector('.input-panel').scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }
+  // Scroll to top of eligibility summary
+  const target = document.getElementById('results-panel');
+  const targetTop = target.getBoundingClientRect().top + window.pageYOffset - 20;
+  window.scrollTo({ top: targetTop, behavior: 'smooth' });
 });
 
 // Allow Enter key submission
