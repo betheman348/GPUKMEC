@@ -1,1 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GP Tools — Clinical decision support for UK general practice</title>
+<meta name="description" content="A growing collection of free, evidence-based clinical decision-support tools for UK general practice. Built by a GP, for GPs.">
+<link rel="preconnect" href="https://fonts.bunny.net">
+<link href="https://fonts.bunny.net/css?family=fraunces:400,500,600,700|inter:400,500,600,700" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f7f5f0;
+    --paper: #ffffff;
+    --ink: #1a1f2e;
+    --ink-soft: #4a5266;
+    --ink-mute: #7c8499;
+    --line: #e3ddd0;
+    --accent: #1d3557;
+    --accent-soft: #e8eef5;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.6;
+    font-size: 16px;
+    min-height: 100vh;
+    background-image: radial-gradient(circle at 1px 1px, rgba(26,31,46,0.04) 1px, transparent 0);
+    background-size: 24px 24px;
+  }
+  .container { max-width: 760px; margin: 0 auto; padding: 64px 24px 80px; }
+  .eyebrow {
+    font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--ink-mute); margin-bottom: 12px; font-weight: 500;
+  }
+  h1 {
+    font-family: 'Fraunces', Georgia, serif; font-weight: 500;
+    font-size: clamp(36px, 5vw, 56px); letter-spacing: -0.02em;
+    line-height: 1.05; margin-bottom: 20px;
+  }
+  h1 em { font-style: italic; color: var(--accent); font-weight: 400; }
+  .lead {
+    font-size: 18px; color: var(--ink-soft); max-width: 580px;
+    margin-bottom: 48px;
+  }
+  .tools { display: grid; gap: 16px; margin-bottom: 56px; }
+  .tool {
+    display: block; background: var(--paper); border: 1px solid var(--line);
+    border-radius: 8px; padding: 24px 28px; text-decoration: none;
+    color: inherit; transition: all 0.15s;
+  }
+  .tool:hover { border-color: var(--accent); transform: translateY(-1px); }
+  .tool-tag {
+    display: inline-block; font-size: 11px; letter-spacing: 0.1em;
+    text-transform: uppercase; font-weight: 600;
+    background: var(--accent-soft); color: var(--accent);
+    padding: 3px 10px; border-radius: 100px; margin-bottom: 10px;
+  }
+  .tool h2 {
+    font-family: 'Fraunces', Georgia, serif; font-weight: 500;
+    font-size: 22px; letter-spacing: -0.01em; margin-bottom: 6px;
+  }
+  .tool p { color: var(--ink-soft); font-size: 14.5px; }
+  .coming-soon {
+    border-style: dashed; opacity: 0.7; cursor: default;
+  }
+  .coming-soon:hover { transform: none; border-color: var(--line); }
+  footer {
+    margin-top: 64px; padding-top: 24px; border-top: 1px solid var(--line);
+    font-size: 13px; color: var(--ink-mute); line-height: 1.6;
+  }
+  footer strong { color: var(--ink); }
+  footer a { color: var(--accent); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+  <div class="container">
+    <div class="eyebrow">Clinical decision support for UK general practice</div>
+    <h1>GP <em>tools</em></h1>
+    <p class="lead">A growing collection of free, evidence-based clinical decision-support tools built by a UK GP, for UK clinicians. No tracking, no ads, no sign-up.</p>
 
+    <div class="tools">
+      <a href="/contraception/" class="tool">
+        <span class="tool-tag">UKMEC 2025</span>
+        <h2>Contraceptive eligibility calculator</h2>
+        <p>Implements the CoSRH UKMEC 2025 framework across the six main contraceptive methods. For UK healthcare professionals.</p>
+      </a>
+      <div class="tool coming-soon">
+        <span class="tool-tag">In development</span>
+        <h2>More tools coming</h2>
+        <p>Feedback and suggestions welcome.</p>
+      </div>
+    </div>
+
+    <footer>
+      <strong>About</strong><br>
+      Built by Dr B Nanda, GP. Tools are clinical decision support, not medical devices, and do not replace clinical judgement.<br><br>
+      <strong>Contact</strong><br>
+      <a href="mailto:betheman348@gmail.com">betheman348@gmail.com</a> — feedback, suggestions, and clinical corrections welcome.<br><br>
+      <strong>Privacy</strong><br>
+      No cookies. No analytics. No tracking. All calculations run in your browser.<br><br>
+      © 2026 B Nanda. All rights reserved.
+    </footer>
+  </div>
+</body>
+</html>
