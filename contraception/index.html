@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Contraceptive Eligibility Calculator (UKMEC 2025)</title>
-<meta name="google-site-verification" content="nAbtK_OUGYdwkpjUh0pS-nDKyWaTz_OVZNI9GKkw1l0" />  
-<meta name="description" content="A free UK clinical decision-support tool implementing CoSRH UKMEC 2025 across the main contraceptive methods. Not a medical device.">
-<meta name="author" content="DrBN">
+<title>UKMEC 2025 Reference — CoSRH contraceptive eligibility criteria</title>
+<meta name="google-site-verification" content="nAbtK_OUGYdwkpjUh0pS-nDKyWaTz_OVZNI9GKkw1l0" />
+<meta name="description" content="An interactive educational reference to CoSRH UKMEC 2025. Filter by scenario to view the relevant published criteria. Not a medical device.">
+<meta name="author" content="Dr BN">
 <meta name="robots" content="index, follow">
-<meta property="og:title" content="Contraceptive Eligibility Calculator (UKMEC 2025)">
-<meta property="og:description" content="Free UK clinical decision-support tool implementing CoSRH UKMEC 2025.">
+<meta property="og:title" content="UKMEC 2025 Reference">
+<meta property="og:description" content="Educational reference to CoSRH UKMEC 2025 contraceptive eligibility criteria.">
 <meta property="og:type" content="website">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -28,7 +28,6 @@
     --line-soft: #efebe2;
     --accent: #1d3557;
     --accent-soft: #e8eef5;
-
     --u1: #2e7d4a;
     --u1-bg: #e8f3ec;
     --u2: #4a8db8;
@@ -37,15 +36,11 @@
     --u3-bg: #fdf2e2;
     --u4: #b91c1c;
     --u4-bg: #fbe9e9;
-
     --radius: 4px;
     --radius-lg: 8px;
   }
-
   * { box-sizing: border-box; margin: 0; padding: 0; }
-
   html { scroll-behavior: smooth; }
-
   body {
     font-family: 'Inter', -apple-system, sans-serif;
     background: var(--bg);
@@ -53,55 +48,39 @@
     line-height: 1.55;
     font-size: 15px;
     min-height: 100vh;
-    background-image:
-      radial-gradient(circle at 1px 1px, rgba(26, 31, 46, 0.04) 1px, transparent 0);
+    background-image: radial-gradient(circle at 1px 1px, rgba(26, 31, 46, 0.04) 1px, transparent 0);
     background-size: 24px 24px;
   }
-
-  .container {
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 32px 24px 80px;
+  .container { max-width: 1280px; margin: 0 auto; padding: 32px 24px 80px; }
+  .top-nav {
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--line-soft);
   }
-/* Top navigation */
-.top-nav {
-  margin-bottom: 24px;
-  padding-bottom: 16px;
-  border-bottom: 1px solid var(--line-soft);
-}
-.top-nav-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  text-decoration: none;
-  color: var(--ink-mute);
-  font-size: 13px;
-  font-weight: 500;
-  transition: color 0.15s;
-  padding: 4px 0;
-}
-.top-nav-link:hover {
-  color: var(--accent);
-}
-.top-nav-arrow {
-  font-size: 16px;
-  line-height: 1;
-  transition: transform 0.15s;
-}
-.top-nav-link:hover .top-nav-arrow {
-  transform: translateX(-2px);
-}
-.top-nav-text {
-  font-family: 'Fraunces', Georgia, serif;
-  font-size: 15px;
-  letter-spacing: -0.01em;
-}
-.top-nav-text em {
-  font-style: italic;
-  color: var(--accent);
-  font-weight: 400;
-}
-  /* Header */
+  .top-nav-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: var(--ink-mute);
+    font-size: 13px;
+    font-weight: 500;
+    transition: color 0.15s;
+    padding: 4px 0;
+  }
+  .top-nav-link:hover { color: var(--accent); }
+  .top-nav-arrow {
+    font-size: 16px;
+    line-height: 1;
+    transition: transform 0.15s;
+  }
+  .top-nav-link:hover .top-nav-arrow { transform: translateX(-2px); }
+  .top-nav-text {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 15px;
+    letter-spacing: -0.01em;
+  }
+  .top-nav-text em { font-style: italic; color: var(--accent); font-weight: 400; }
   header {
     border-bottom: 1px solid var(--line);
     padding-bottom: 24px;
@@ -124,18 +103,8 @@
     color: var(--ink);
     margin-bottom: 8px;
   }
-  h1 em {
-    font-style: italic;
-    color: var(--accent);
-    font-weight: 400;
-  }
-  .subtitle {
-    color: var(--ink-soft);
-    font-size: 15px;
-    max-width: 720px;
-  }
-
-  /* Disclaimer */
+  h1 em { font-style: italic; color: var(--accent); font-weight: 400; }
+  .subtitle { color: var(--ink-soft); font-size: 15px; max-width: 720px; }
   .disclaimer {
     background: var(--paper);
     border: 1px solid var(--line);
@@ -147,18 +116,12 @@
     border-radius: var(--radius);
   }
   .disclaimer strong { color: var(--ink); font-weight: 600; }
-
-  /* Layout */
   .layout {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 32px;
   }
-  @media (max-width: 980px) {
-    .layout { grid-template-columns: 1fr; }
-  }
-
-  /* Form panel */
+  @media (max-width: 980px) { .layout { grid-template-columns: 1fr; } }
   .panel {
     background: var(--paper);
     border: 1px solid var(--line);
@@ -172,12 +135,7 @@
     margin-bottom: 4px;
     letter-spacing: -0.01em;
   }
-  .panel-sub {
-    font-size: 13px;
-    color: var(--ink-mute);
-    margin-bottom: 24px;
-  }
-
+  .panel-sub { font-size: 13px; color: var(--ink-mute); margin-bottom: 24px; }
   fieldset {
     border: none;
     margin-bottom: 24px;
@@ -194,10 +152,7 @@
     margin-bottom: 14px;
     display: block;
   }
-
-  .field {
-    margin-bottom: 14px;
-  }
+  .field { margin-bottom: 14px; }
   .field:last-child { margin-bottom: 0; }
   label.field-label {
     display: block;
@@ -206,13 +161,7 @@
     color: var(--ink);
     margin-bottom: 6px;
   }
-  .field-help {
-    font-size: 12px;
-    color: var(--ink-mute);
-    margin-top: 4px;
-  }
-
-  /* Inputs */
+  .field-help { font-size: 12px; color: var(--ink-mute); margin-top: 4px; }
   input[type="number"], select {
     width: 100%;
     padding: 9px 12px;
@@ -229,19 +178,8 @@
     border-color: var(--accent);
     box-shadow: 0 0 0 3px var(--accent-soft);
   }
-
-  .field-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-  }
-
-  /* Checkboxes */
-  .check-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 6px;
-  }
+  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .check-grid { display: grid; grid-template-columns: 1fr; gap: 6px; }
   .check-item {
     display: flex;
     align-items: flex-start;
@@ -256,9 +194,13 @@
   .check-item input { margin-top: 3px; cursor: pointer; flex-shrink: 0; }
   .check-item input:checked + .check-text { color: var(--accent); font-weight: 500; }
   .check-text { font-size: 13.5px; line-height: 1.45; }
-  .check-text small { display: block; color: var(--ink-mute); font-size: 11.5px; margin-top: 2px; font-weight: 400; }
-
-  /* Actions */
+  .check-text small {
+    display: block;
+    color: var(--ink-mute);
+    font-size: 11.5px;
+    margin-top: 2px;
+    font-weight: 400;
+  }
   .actions {
     display: flex;
     gap: 10px;
@@ -276,11 +218,7 @@
     transition: all 0.15s;
     border: 1px solid transparent;
   }
-  .btn-primary {
-    background: var(--accent);
-    color: white;
-    flex: 1;
-  }
+  .btn-primary { background: var(--accent); color: white; flex: 1; }
   .btn-primary:hover { background: #14253f; }
   .btn-secondary {
     background: transparent;
@@ -288,8 +226,6 @@
     border-color: var(--line);
   }
   .btn-secondary:hover { background: var(--line-soft); }
-
-  /* Results */
   .results-empty {
     text-align: center;
     padding: 60px 24px;
@@ -302,102 +238,107 @@
     margin-bottom: 12px;
     line-height: 1;
   }
-
-  .computed-meta {
+  .filter-summary {
     display: flex;
     flex-wrap: wrap;
-    gap: 14px 24px;
-    padding: 14px 18px;
+    gap: 6px 8px;
+    padding: 12px 16px;
     background: var(--accent-soft);
     border-radius: var(--radius);
     margin-bottom: 20px;
-    font-size: 13px;
+    font-size: 12px;
+    color: var(--ink-soft);
   }
-  .computed-meta div { color: var(--ink-soft); }
-  .computed-meta strong { color: var(--ink); font-weight: 600; }
-
-  .method-list { display: flex; flex-direction: column; gap: 12px; }
-
-  .method-card {
+  .filter-pill {
+    background: #fff;
+    padding: 3px 10px;
+    border-radius: 100px;
+    border: 1px solid var(--line);
+    font-size: 12px;
+  }
+  .filter-pill strong { color: var(--ink); font-weight: 600; }
+  .section-list { display: flex; flex-direction: column; gap: 14px; }
+  .ref-section {
     border: 1px solid var(--line);
     border-radius: var(--radius);
-    padding: 16px 18px;
+    padding: 18px 20px;
     background: #fff;
-    transition: border-color 0.15s;
   }
-  .method-card.cat-1 { border-left: 4px solid var(--u1); }
-  .method-card.cat-2 { border-left: 4px solid var(--u2); }
-  .method-card.cat-3 { border-left: 4px solid var(--u3); }
-  .method-card.cat-4 { border-left: 4px solid var(--u4); }
-
-  .method-head {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 16px;
-    margin-bottom: 8px;
-  }
-  .method-name {
+  .section-title {
     font-family: 'Fraunces', Georgia, serif;
     font-size: 17px;
     font-weight: 500;
     color: var(--ink);
     letter-spacing: -0.005em;
+    margin-bottom: 4px;
   }
-  .method-name small {
-    display: block;
-    font-family: 'Inter', sans-serif;
-    font-size: 12px;
-    color: var(--ink-mute);
-    font-weight: 400;
-    margin-top: 2px;
-    letter-spacing: 0;
-  }
-
-  .badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 4px 10px;
-    border-radius: 100px;
-    font-size: 12px;
+  .section-tag {
+    display: inline-block;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
     font-weight: 600;
-    letter-spacing: 0.02em;
-    white-space: nowrap;
-    flex-shrink: 0;
+    background: var(--u2-bg);
+    color: var(--u2);
+    padding: 2px 8px;
+    border-radius: 100px;
+    margin-left: 8px;
+    vertical-align: middle;
   }
-  .badge.cat-1 { background: var(--u1-bg); color: var(--u1); }
-  .badge.cat-2 { background: var(--u2-bg); color: var(--u2); }
-  .badge.cat-3 { background: var(--u3-bg); color: var(--u3); }
-  .badge.cat-4 { background: var(--u4-bg); color: var(--u4); }
-  .badge-dot {
-    width: 8px; height: 8px; border-radius: 50%;
-    background: currentColor;
+  .section-source {
+    font-size: 11px;
+    color: var(--ink-mute);
+    margin-bottom: 12px;
   }
-
-  .reasons {
-    margin-top: 8px;
-    font-size: 13px;
+  .section-note {
+    font-size: 12px;
     color: var(--ink-soft);
-  }
-  .reasons ul {
-    list-style: none;
-    margin-top: 6px;
-  }
-  .reasons li {
-    padding: 4px 0 4px 16px;
-    position: relative;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid var(--line-soft);
     line-height: 1.5;
   }
-  .reasons li::before {
-    content: "→";
-    position: absolute;
-    left: 0;
-    color: var(--ink-mute);
+  .criteria-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12.5px;
+    margin-top: 6px;
   }
-  .reasons li b { color: var(--ink); font-weight: 600; }
-
-  /* Legend */
+  .criteria-table th {
+    text-align: left;
+    font-weight: 600;
+    color: var(--ink-soft);
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 6px 4px;
+    border-bottom: 1px solid var(--line);
+  }
+  .criteria-table th:not(:first-child) { text-align: center; }
+  .criteria-table td {
+    padding: 7px 4px;
+    border-bottom: 1px solid var(--line-soft);
+    vertical-align: middle;
+    line-height: 1.4;
+  }
+  .criteria-table td:not(:first-child) { text-align: center; font-weight: 500; }
+  .criteria-table tr:last-child td { border-bottom: none; }
+  .criteria-table td:first-child { color: var(--ink); font-size: 12.5px; }
+  .cat-pill {
+    display: inline-block;
+    min-width: 22px;
+    padding: 2px 6px;
+    border-radius: 100px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 11.5px;
+    line-height: 18px;
+  }
+  .cat-pill.c1 { background: var(--u1-bg); color: var(--u1); }
+  .cat-pill.c2 { background: var(--u2-bg); color: var(--u2); }
+  .cat-pill.c3 { background: var(--u3-bg); color: var(--u3); }
+  .cat-pill.c4 { background: var(--u4-bg); color: var(--u4); }
+  .cat-pill.cna { background: var(--line-soft); color: var(--ink-mute); }
   .legend {
     background: var(--paper);
     border: 1px solid var(--line);
@@ -418,11 +359,7 @@
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 14px;
   }
-  .legend-item {
-    display: flex;
-    gap: 12px;
-    align-items: flex-start;
-  }
+  .legend-item { display: flex; gap: 12px; align-items: flex-start; }
   .legend-num {
     flex-shrink: 0;
     width: 28px;
@@ -441,7 +378,6 @@
   .legend-num.cat-4 { background: var(--u4-bg); color: var(--u4); }
   .legend-text { font-size: 12.5px; line-height: 1.45; color: var(--ink-soft); }
   .legend-text strong { color: var(--ink); display: block; font-size: 13px; margin-bottom: 2px; }
-
   footer {
     margin-top: 40px;
     padding-top: 24px;
@@ -476,7 +412,6 @@
     text-align: center;
     font-size: 11px;
   }
-
   @media print {
     body { background: white; }
     .panel.input-panel, .actions, .legend, footer, .disclaimer { display: none; }
@@ -493,23 +428,20 @@
       </a>
     </nav>
     <header>
-      <div class="eyebrow">UKMEC 2025 · CoSRH</div>
-      <h1>Contraceptive <em>eligibility</em> calculator</h1>
-      <p class="subtitle">A clinical decision-support tool for assessing UK Medical Eligibility Criteria across the main contraceptive methods. Updated to UKMEC 2025 (published December 2025). Enter patient factors on the left; results stream on the right.</p>
+      <div class="eyebrow">UKMEC 2025 · CoSRH educational reference</div>
+      <h1>UKMEC 2025 <em>reference</em></h1>
+      <p class="subtitle">An interactive way to view the published UKMEC 2025 criteria for the six main contraceptive methods. Select scenario factors on the left to reveal the relevant sections of CoSRH guidance. Read the full CoSRH document before any clinical decision.</p>
       <div class="disclaimer">
-        <strong>Clinical decision support — not a medical device.</strong> This calculator summarises UKMEC categories based on the factors you enter. It is not a medical device, does not replace clinical judgement, and does not capture every clinical scenario. Always cross-reference with the full CoSRH guidance and consider initiation vs continuation criteria for individual patients. Where multiple UKMEC 2 or 3 conditions co-exist, cumulative risk may push the overall recommendation higher — apply clinical judgement. Intended for use by qualified UK healthcare professionals.
+        <strong>Educational reference — not a medical device.</strong> This page surfaces excerpts from CoSRH UKMEC 2025 based on the filters you select. It makes no clinical assessment, gives no patient-specific recommendation, and is not a substitute for the full CoSRH guidance. All clinical judgement, prescribing decisions, and patient assessment remain entirely with the qualified healthcare professional. Categories shown are CoSRH's published wording; interpretation is the reader's. Intended for UK healthcare professionals as a quick way to navigate the published criteria.
       </div>
     </header>
-
     <div class="layout">
-      <!-- INPUT PANEL -->
       <section class="panel input-panel">
-        <h2 class="panel-title">Patient factors</h2>
-        <p class="panel-sub">All fields optional. Leave blank if unknown.</p>
-
-        <form id="patient-form">
+        <h2 class="panel-title">Scenario filters</h2>
+        <p class="panel-sub">Select factors to reveal the relevant sections of UKMEC 2025. All optional.</p>
+        <form id="filter-form">
           <fieldset>
-            <legend>Demographics & vitals</legend>
+            <legend>Demographics &amp; vitals</legend>
             <div class="field">
               <label class="field-label" for="age">Age (years)</label>
               <input type="number" id="age" min="12" max="60" placeholder="e.g. 38">
@@ -540,7 +472,7 @@
                 <option value="clinic">Clinic reading</option>
                 <option value="home">Home / ambulatory reading</option>
               </select>
-              <p class="field-help">UKMEC 2025 applies NICE classification: home/ABPM thresholds are 5 mmHg lower than clinic readings.</p>
+              <p class="field-help">UKMEC 2025 uses NICE classification. Home/ABPM thresholds are 5 mmHg lower than clinic readings.</p>
             </div>
             <div class="field">
               <label class="field-label" for="smoking">Smoking status</label>
@@ -553,9 +485,8 @@
               </select>
             </div>
           </fieldset>
-
           <fieldset>
-            <legend>Cardiovascular & thrombotic</legend>
+            <legend>Cardiovascular &amp; thrombotic</legend>
             <div class="check-grid">
               <label class="check-item">
                 <input type="checkbox" data-flag="vte">
@@ -580,34 +511,33 @@
               <label class="check-item">
                 <input type="checkbox" data-flag="multi-cv">
                 <span class="check-text">Multiple cardiovascular risk factors
-                  <small>e.g. older age + smoking + diabetes + HTN</small>
+                  <small>e.g. older age + smoking + diabetes + hypertension</small>
                 </span>
               </label>
               <label class="check-item">
                 <input type="checkbox" data-flag="surgery">
-                <span class="check-text">Major surgery with prolonged immobilisation (planned/current)</span>
+                <span class="check-text">Major surgery with prolonged immobilisation</span>
               </label>
             </div>
           </fieldset>
-
           <fieldset>
-            <legend>Neurological & rheumatological</legend>
+            <legend>Neurological &amp; rheumatological</legend>
             <div class="field">
               <label class="field-label" for="migraine">Migraine</label>
               <select id="migraine">
-                <option value="none">None</option>
+                <option value="none">No migraine</option>
                 <option value="without">Migraine without aura</option>
                 <option value="with">Migraine with aura</option>
               </select>
             </div>
             <div class="field">
-              <label class="field-label" for="ms">Multiple sclerosis <small style="font-weight: 400; color: var(--ink-mute);">(new in 2025)</small></label>
+              <label class="field-label" for="ms">Multiple sclerosis</label>
               <select id="ms">
                 <option value="none">No MS</option>
                 <option value="ms-mobile">MS, mobile</option>
                 <option value="ms-immobile">MS with prolonged immobility</option>
               </select>
-              <p class="field-help">MS patients have ~1.2x fracture risk; relevant for DMPA. Immobility increases VTE risk.</p>
+              <p class="field-help">Added to UKMEC 2025.</p>
             </div>
             <div class="check-grid">
               <label class="check-item">
@@ -616,9 +546,8 @@
               </label>
             </div>
           </fieldset>
-
           <fieldset>
-            <legend>Endocrine & metabolic</legend>
+            <legend>Endocrine &amp; metabolic</legend>
             <div class="field">
               <label class="field-label" for="diabetes">Diabetes</label>
               <select id="diabetes">
@@ -628,9 +557,8 @@
               </select>
             </div>
           </fieldset>
-
           <fieldset>
-            <legend>Oncological & hepatic</legend>
+            <legend>Oncological &amp; hepatic</legend>
             <div class="field">
               <label class="field-label" for="breast">Breast cancer</label>
               <select id="breast">
@@ -638,7 +566,7 @@
                 <option value="past">Past breast cancer, no recurrence ≥5 years (off all treatment)</option>
                 <option value="current">Current breast cancer or on tamoxifen / aromatase inhibitor</option>
               </select>
-              <p class="field-help">UKMEC 2025 clarifies "current treatment" includes the years on tamoxifen or aromatase inhibitors, not just primary therapy.</p>
+              <p class="field-help">UKMEC 2025 clarifies "current treatment" includes the years on tamoxifen or aromatase inhibitors.</p>
             </div>
             <div class="field">
               <label class="field-label" for="liver">Liver disease</label>
@@ -649,9 +577,8 @@
               </select>
             </div>
           </fieldset>
-
           <fieldset>
-            <legend>Postpartum & pregnancy</legend>
+            <legend>Postpartum &amp; pregnancy</legend>
             <div class="field">
               <label class="field-label" for="postpartum">Postpartum status</label>
               <select id="postpartum">
@@ -663,9 +590,8 @@
               </select>
             </div>
           </fieldset>
-
           <fieldset>
-            <legend>Renal, haematological & HIV <small style="font-weight: 400; color: var(--ink-mute); letter-spacing: 0;">(updated 2025)</small></legend>
+            <legend>Renal, haematological &amp; HIV</legend>
             <div class="field">
               <label class="field-label" for="ckd">Chronic kidney disease</label>
               <select id="ckd">
@@ -673,7 +599,7 @@
                 <option value="ckd-mild">CKD stages 1–2</option>
                 <option value="ckd-mod-severe">CKD stages 3–5</option>
               </select>
-              <p class="field-help">All severities of CKD increase VTE risk in UKMEC 2025; bone health relevant for DMPA.</p>
+              <p class="field-help">Added to UKMEC 2025.</p>
             </div>
             <div class="field">
               <label class="field-label" for="hiv">HIV status</label>
@@ -682,20 +608,19 @@
                 <option value="hiv-well">HIV, clinically well, on ART</option>
                 <option value="hiv-unwell">HIV, clinically unwell or not on treatment</option>
               </select>
-              <p class="field-help">UKMEC 2025 uses clinical status and treatment, not CD4 count. Check ART for enzyme interactions separately.</p>
+              <p class="field-help">UKMEC 2025 categorises by clinical status, not CD4 count.</p>
             </div>
             <div class="check-grid">
               <label class="check-item">
                 <input type="checkbox" data-flag="sct">
                 <span class="check-text">Sickle cell trait
-                  <small>New in UKMEC 2025: small VTE risk, no formal MEC rating, consider alternatives to CHC</small>
+                  <small>Added to UKMEC 2025</small>
                 </span>
               </label>
             </div>
           </fieldset>
-
           <fieldset>
-            <legend>Drug interactions & IUC-specific</legend>
+            <legend>Drug interactions &amp; IUC-specific</legend>
             <div class="check-grid">
               <label class="check-item">
                 <input type="checkbox" data-flag="enzyme">
@@ -723,104 +648,393 @@
               </label>
             </div>
           </fieldset>
-
           <div class="actions">
-            <button type="button" class="btn-primary" id="calculate">Calculate eligibility</button>
-            <button type="button" class="btn-secondary" id="reset">Reset</button>
+            <button type="button" class="btn-primary" id="show">Show UKMEC criteria</button>
+            <button type="button" class="btn-secondary" id="reset">Clear filters</button>
           </div>
         </form>
       </section>
-
-      <!-- RESULTS PANEL -->
       <section class="panel" id="results-panel">
-        <h2 class="panel-title">Eligibility summary</h2>
-        <p class="panel-sub">UKMEC category for each method based on entered factors.</p>
-
+        <h2 class="panel-title">Relevant UKMEC sections</h2>
+        <p class="panel-sub">Sections of UKMEC 2025 relevant to your selected filters. Categories shown are CoSRH's published wording.</p>
         <div id="results-content">
           <div class="results-empty">
             <div class="results-empty-icon">∅</div>
-            <p>Enter patient factors and press <strong>Calculate eligibility</strong> to see the UKMEC summary.</p>
+            <p>Select filters on the left, then press <strong>Show UKMEC criteria</strong> to view the relevant published sections.</p>
           </div>
         </div>
       </section>
     </div>
-
-    <!-- LEGEND -->
     <div class="legend">
-      <div class="legend-title">UKMEC categories</div>
+      <div class="legend-title">UKMEC categories (CoSRH definitions)</div>
       <div class="legend-grid">
         <div class="legend-item">
           <div class="legend-num cat-1">1</div>
           <div class="legend-text">
-            <strong>No restriction</strong>
+            <strong>Category 1</strong>
             A condition for which there is no restriction for the use of the method.
           </div>
         </div>
         <div class="legend-item">
           <div class="legend-num cat-2">2</div>
           <div class="legend-text">
-            <strong>Advantages outweigh risks</strong>
-            Method generally can be used. Benefits typically outweigh theoretical or proven risks.
+            <strong>Category 2</strong>
+            A condition where the advantages of using the method generally outweigh the theoretical or proven risks.
           </div>
         </div>
         <div class="legend-item">
           <div class="legend-num cat-3">3</div>
           <div class="legend-text">
-            <strong>Risks usually outweigh benefits</strong>
-            Use requires expert clinical judgement. Refer or consult specialist; alternatives generally preferable.
+            <strong>Category 3</strong>
+            A condition where the theoretical or proven risks usually outweigh the advantages of using the method. The provision of a method requires expert clinical judgement.
           </div>
         </div>
         <div class="legend-item">
           <div class="legend-num cat-4">4</div>
           <div class="legend-text">
-            <strong>Unacceptable health risk</strong>
-            Method should not be used.
+            <strong>Category 4</strong>
+            A condition which represents an unacceptable health risk if the method is used.
           </div>
         </div>
       </div>
     </div>
-
     <footer>
       <div class="footer-grid">
         <div class="footer-block">
           <strong>About</strong>
-          A free clinical decision-support tool implementing the CoSRH UKMEC 2025 framework. Built by a UK GP for UK clinicians. Feedback welcome.
+          A free educational reference implementing the CoSRH UKMEC 2025 framework. Built by a UK GP for UK clinicians. Surfaces published guidance — does not make clinical assessments. Feedback welcome.
         </div>
         <div class="footer-block">
           <strong>Contact &amp; feedback</strong>
-          <a href="mailto:feedback@gp-tools.uk?subject=UKMEC%20Calculator%20Feedback">feedback@gp-tools.uk</a><br>
+          <a href="mailto:feedback@gp-tools.uk?subject=UKMEC%20Reference%20Feedback">feedback@gp-tools.uk</a><br>
           Bug reports, suggested features, and clinical corrections appreciated.
         </div>
         <div class="footer-block">
-          <strong>Reference</strong>
-          <a href="https://www.cosrh.org/Public/Public/News/Articles/Updated-UK-Medical-Eligibility-Criteria-for-Contraceptive-Use.aspx" target="_blank" rel="noopener">CoSRH UKMEC 2025</a>, published December 2025. The College of Sexual and Reproductive Healthcare (formerly FSRH). UKMEC content © CoSRH.
+          <strong>Source</strong>
+          UKMEC content © CoSRH 2025. Reproduced for non-commercial educational reference under CoSRH's reproduction permission. See the <a href="https://www.cosrh.org/Public/Public/News/Articles/Updated-UK-Medical-Eligibility-Criteria-for-Contraceptive-Use.aspx" target="_blank" rel="noopener">full CoSRH UKMEC 2025 guidance</a>.
         </div>
         <div class="footer-block">
           <strong>Privacy</strong>
-          No cookies. No analytics. No tracking. No data leaves your browser — all calculations run locally on your device. Nothing you enter is stored or transmitted.
+          No cookies. No analytics. No tracking. No data leaves your browser — all filtering runs locally on your device. Nothing you enter is stored or transmitted.
         </div>
       </div>
       <div class="footer-meta">
-        Version 1.0 &nbsp;·&nbsp; Last updated 17 May 2026 &nbsp;·&nbsp; © 2026 BN. All rights reserved. &nbsp;·&nbsp; Not a medical device.
+        Version 2.0 &nbsp;·&nbsp; Last reviewed 22 May 2026 &nbsp;·&nbsp; Next review due November 2026 &nbsp;·&nbsp; © 2026 Dr BN &nbsp;·&nbsp; Educational reference, not a medical device
       </div>
     </footer>
   </div>
-
 <script>
 /* ============================================================
-   UKMEC LOGIC
-   Methods: CHC, POP, IMP (implant), DMPA, LNG-IUS, Cu-IUD
-   For each method, we collect "category votes" from factors
-   and return the highest (most restrictive) category.
+   UKMEC 2025 REFERENCE — data-driven section browser
+   This file surfaces CoSRH UKMEC 2025 published categories.
+   It does NOT calculate eligibility or make recommendations.
+   Each section reflects the published criteria; the user reads
+   and interprets all rows. No verdict is rendered.
    ============================================================ */
 
 const METHODS = [
-  { key: 'chc',   name: 'Combined hormonal contraception',  sub: 'Combined pill, patch, vaginal ring' },
-  { key: 'pop',   name: 'Progestogen-only pill',            sub: 'Desogestrel, levonorgestrel, drospirenone' },
-  { key: 'imp',   name: 'Progestogen-only implant',         sub: 'Nexplanon (etonogestrel)' },
-  { key: 'dmpa',  name: 'Progestogen-only injectable',      sub: 'Depo-Provera, Sayana Press (DMPA)' },
-  { key: 'lng',   name: 'LNG intrauterine system',          sub: 'Mirena, Levosert, Kyleena, Jaydess' },
-  { key: 'cu',    name: 'Copper intrauterine device',       sub: 'Cu-IUD' }
+  { key: 'chc',  short: 'CHC',     name: 'Combined hormonal contraception' },
+  { key: 'pop',  short: 'POP',     name: 'Progestogen-only pill' },
+  { key: 'imp',  short: 'Implant', name: 'Progestogen-only implant' },
+  { key: 'dmpa', short: 'DMPA',    name: 'Progestogen-only injectable' },
+  { key: 'lng',  short: 'LNG-IUS', name: 'LNG intrauterine system' },
+  { key: 'cu',   short: 'Cu-IUD',  name: 'Copper intrauterine device' }
+];
+
+/*
+  SECTIONS — each represents a section of UKMEC 2025.
+  Each section has:
+   - id, title, optional tag (e.g. "New in 2025")
+   - trigger(filters) -> boolean: whether to show this section
+   - rows[]: each row is { desc, chc, pop, imp, dmpa, lng, cu }
+     Values are the published UKMEC categories (1-4) or null if not applicable.
+   - note: optional text — direct factual annotation about the section
+   - source: attribution
+
+  IMPORTANT: This data should be verified against the published
+  CoSRH UKMEC 2025 PDF before going live. Some categories use
+  combined initiation/continuation values for clarity; the full
+  guidance should be consulted for nuances.
+*/
+const SECTIONS = [
+  {
+    id: 'smoking-age',
+    title: 'Smoking and age',
+    trigger: f => (f.smoking && f.smoking !== 'never') || (f.age !== null && f.age >= 35),
+    rows: [
+      { desc: 'Non-smoker, any age',                              chc: 1, pop: 1, imp: 1, dmpa: 1, lng: 1, cu: 1 },
+      { desc: 'Current smoker, age <35',                          chc: 2, pop: 1, imp: 1, dmpa: 1, lng: 1, cu: 1 },
+      { desc: 'Age ≥35, smoker <15/day',                          chc: 3, pop: 1, imp: 1, dmpa: 1, lng: 1, cu: 1 },
+      { desc: 'Age ≥35, smoker ≥15/day',                          chc: 4, pop: 1, imp: 1, dmpa: 1, lng: 1, cu: 1 },
+      { desc: 'Age ≥35, stopped <1 year ago',                     chc: 3, pop: 1, imp: 1, dmpa: 1, lng: 1, cu: 1 },
+      { desc: 'Age ≥35, stopped ≥1 year ago',                     chc: 2, pop: 1, imp: 1, dmpa: 1, lng: 1, cu: 1 }
+    ],
+    note: 'Smoking categories apply to combined hormonal contraception in particular. Progestogen-only methods and IUCs are unaffected by smoking status alone.',
+    source: 'CoSRH UKMEC 2025'
+  },
+  {
+    id: 'bmi',
+    title: 'Body mass index (BMI)',
+    trigger: f => f.bmi !== null,
+    rows: [
+      { desc: 'BMI <30 kg/m²',                                    chc: 1, pop: 1, imp: 1, dmpa: 1, lng: 1, cu: 1 },
+      { desc: 'BMI 30–34 kg/m²',                                  chc: 2, pop: 1, imp: 1, dmpa: 1, lng: 1, cu: 1 },
+      { desc: 'BMI ≥35 kg/m²',                                    chc: 3, pop: 1, imp: 1, dmpa: 2, lng: 1, cu: 1 }
+    ],
+    note: 'UKMEC 2025 upgraded DMPA at BMI ≥35 to Category 2 in light of VTE evidence.',
+    source: 'CoSRH UKMEC 2025'
+  },
+  {
+    id: 'hypertension',
+    title: 'Hypertension',
+    trigger: f => f.sbp !== null || f.dbp !== null,
+    rows: [
+      { desc: 'Adequately controlled hypertension',                chc: 3, pop: 1, imp: 1, dmpa: 2, lng: 1, cu: 1 },
+      { desc: 'NICE Stage 1 (clinic 140–159/90–99; home 135–149/85–94)', chc: 3, pop: 1, imp: 1, dmpa: 2, lng: 1, cu: 1 },
+      { desc: 'NICE Stage 2 (clinic ≥160/100; home ≥150/95)',     chc: 4, pop: 2, imp: 2, dmpa: 3, lng: 2, cu: 1 },
+      { desc: 'Vascular disease',                                  chc: 4, pop: 2, imp: 2, dmpa: 3, lng: 2, cu: 1 }
+    ],
+    note: 'UKMEC 2025 aligns BP thresholds with NICE classification and accepts home/ABPM readings (thresholds 5 mmHg lower than clinic).',
+    source: 'CoSRH UKMEC 2025'
+  },
+  {
+    id: 'vte',
+    title: 'Personal history of venous thromboembolism',
+    trigger: f => f.flags.vte,
+    rows: [
+      { desc: 'Current VTE (on anticoagulant therapy)',            chc: 4, pop: 2, imp: 2, dmpa: 2, lng: 2, cu: 1 },
+      { desc: 'Past VTE',                                          chc: 4, pop: 2, imp: 2, dmpa: 2, lng: 2, cu: 1 }
+    ],
+    note: 'Family history of VTE in a first-degree relative aged <45 is CHC = 2 (not shown above).',
+    source: 'CoSRH UKMEC 2025'
+  },
+  {
+    id: 'thrombophilia',
+    title: 'Known thrombogenic mutations',
+    tag: 'Updated 2025',
+    trigger: f => f.flags.thrombophilia,
+    rows: [
+      { desc: 'Factor V Leiden, prothrombin, protein C/S, antithrombin deficiency', chc: 4, pop: 2, imp: 2, dmpa: 3, lng: 2, cu: 1 }
+    ],
+    note: 'UKMEC 2025 upgraded DMPA to Category 3 for known thrombogenic mutations following further VTE evidence.',
+    source: 'CoSRH UKMEC 2025'
+  },
+  {
+    id: 'surgery',
+    title: 'Major surgery with prolonged immobilisation',
+    trigger: f => f.flags.surgery,
+    rows: [
+      { desc: 'Major surgery with prolonged immobilisation',       chc: 4, pop: 2, imp: 2, dmpa: 2, lng: 2, cu: 1 },
+      { desc: 'Major surgery without prolonged immobilisation',    chc: 2, pop: 1, imp: 1, dmpa: 1, lng: 1, cu: 1 },
+      { desc: 'Minor surgery without immobilisation',              chc: 1, pop: 1, imp: 1, dmpa: 1, lng: 1, cu: 1 }
+    ],
+    source: 'CoSRH UKMEC 2025'
+  },
+  {
+    id: 'ihd',
+    title: 'Ischaemic heart disease',
+    trigger: f => f.flags.ihd,
+    rows: [
+      { desc: 'Current or history of IHD — initiation',            chc: 4, pop: 2, imp: 2, dmpa: 3, lng: 2, cu: 1 },
+      { desc: 'Current or history of IHD — continuation',          chc: 4, pop: 3, imp: 3, dmpa: 3, lng: 3, cu: 1 }
+    ],
+    note: 'Initiation vs continuation distinctions matter for some methods. Refer to the full guidance.',
+    source: 'CoSRH UKMEC 2025'
+  },
+  {
+    id: 'stroke',
+    title: 'Stroke or TIA',
+    tag: 'Updated 2025',
+    trigger: f => f.flags.stroke,
+    rows: [
+      { desc: 'History of stroke / TIA — initiation',              chc: 4, pop: 2, imp: 2, dmpa: 3, lng: 2, cu: 1 },
+      { desc: 'History of stroke / TIA — continuation',            chc: 4, pop: 3, imp: 3, dmpa: 3, lng: 2, cu: 1 }
+    ],
+    note: 'UKMEC 2025 removed the Category 3 continuation rating for LNG-IUS following review of the evidence.',
+    source: 'CoSRH UKMEC 2025'
+  },
+  {
+    id: 'multi-cv',
+    title: 'Multiple cardiovascular risk factors',
+    trigger: f => f.flags.multiCV,
+    rows: [
+      { desc: 'Multiple risk factors (e.g. older age, smoking, diabetes, hypertension)', chc: 3, pop: 2, imp: 2, dmpa: 3, lng: 2, cu: 1 }
+    ],
+    note: 'CoSRH notes that risks may interact; assess overall cardiovascular risk. Some combinations may fall to Category 4 for CHC.',
+    source: 'CoSRH UKMEC 2025'
+  },
+  {
+    id: 'migraine',
+    title: 'Migraine',
+    trigger: f => f.migraine && f.migraine !== 'none',
+    rows: [
+      { desc: 'Without aura, age <35 — initiation',                chc: 2, pop: 1, imp: 1, dmpa: 1, lng: 1, cu: 1 },
+      { desc: 'Without aura, age <35 — continuation',              chc: 3, pop: 1, imp: 1, dmpa: 1, lng: 1, cu: 1 },
+      { desc: 'Without aura, age ≥35 — initiation',                chc: 3, pop: 1, imp: 1, dmpa: 1, lng: 1, cu: 1 },
+      { desc: 'Without aura, age ≥35 — continuation',              chc: 4, pop: 1, imp: 1, dmpa: 1, lng: 1, cu: 1 },
+      { desc: 'With aura, any age — initiation',                   chc: 4, pop: 2, imp: 2, dmpa: 2, lng: 2, cu: 1 },
+      { desc: 'With aura, any age — continuation',                 chc: 4, pop: 3, imp: 3, dmpa: 3, lng: 3, cu: 1 }
+    ],
+    source: 'CoSRH UKMEC 2025'
+  },
+  {
+    id: 'diabetes',
+    title: 'Diabetes',
+    trigger: f => f.diabetes && f.diabetes !== 'none',
+    rows: [
+      { desc: 'History of gestational diabetes only',              chc: 1, pop: 1, imp: 1, dmpa: 1, lng: 1, cu: 1 },
+      { desc: 'Diabetes without vascular complications',           chc: 2, pop: 2, imp: 2, dmpa: 2, lng: 2, cu: 1 },
+      { desc: 'Diabetes with vascular complications or duration >20 years', chc: 3, pop: 2, imp: 2, dmpa: 3, lng: 2, cu: 1 }
+    ],
+    note: 'Some severe combinations may be Category 4 for CHC.',
+    source: 'CoSRH UKMEC 2025'
+  },
+  {
+    id: 'breast',
+    title: 'Breast cancer',
+    tag: 'Clarified 2025',
+    trigger: f => f.breast && f.breast !== 'none',
+    rows: [
+      { desc: 'No history of breast cancer',                       chc: 1, pop: 1, imp: 1, dmpa: 1, lng: 1, cu: 1 },
+      { desc: 'BRCA1/BRCA2 carrier (no diagnosis)',                chc: 3, pop: 2, imp: 2, dmpa: 2, lng: 2, cu: 1 },
+      { desc: 'Past breast cancer, no recurrence ≥5 years',        chc: 3, pop: 3, imp: 3, dmpa: 3, lng: 3, cu: 1 },
+      { desc: 'Current breast cancer (incl. on tamoxifen / AI)',   chc: 4, pop: 4, imp: 4, dmpa: 4, lng: 4, cu: 1 }
+    ],
+    note: 'UKMEC 2025 clarifies that "current treatment" includes the years on tamoxifen or aromatase inhibitors, not just primary therapy.',
+    source: 'CoSRH UKMEC 2025'
+  },
+  {
+    id: 'liver',
+    title: 'Liver disease',
+    trigger: f => f.liver && f.liver !== 'none',
+    rows: [
+      { desc: 'Acute viral hepatitis or mild compensated cirrhosis', chc: 3, pop: 2, imp: 2, dmpa: 2, lng: 2, cu: 1 },
+      { desc: 'Severe (decompensated) cirrhosis',                   chc: 4, pop: 3, imp: 3, dmpa: 3, lng: 3, cu: 1 },
+      { desc: 'Hepatocellular adenoma',                             chc: 4, pop: 3, imp: 3, dmpa: 3, lng: 3, cu: 1 },
+      { desc: 'Hepatocellular carcinoma',                           chc: 4, pop: 3, imp: 3, dmpa: 3, lng: 3, cu: 1 }
+    ],
+    source: 'CoSRH UKMEC 2025'
+  },
+  {
+    id: 'postpartum',
+    title: 'Postpartum (including breastfeeding)',
+    tag: 'Updated 2025',
+    trigger: f => f.postpartum && f.postpartum !== 'none',
+    rows: [
+      { desc: 'Breastfeeding, <6 weeks postpartum',                 chc: 4, pop: 1, imp: 1, dmpa: 2, lng: 2, cu: 2 },
+      { desc: 'Breastfeeding, 6 weeks – 6 months postpartum',       chc: 2, pop: 1, imp: 1, dmpa: 1, lng: 1, cu: 1 },
+      { desc: 'Not breastfeeding, <3 weeks (no VTE risk factors)',  chc: 3, pop: 1, imp: 1, dmpa: 2, lng: 2, cu: 2 },
+      { desc: 'Not breastfeeding, <3 weeks (with other VTE risk factors)', chc: 4, pop: 1, imp: 1, dmpa: 3, lng: 2, cu: 2 },
+      { desc: 'Not breastfeeding, 3–6 weeks (no VTE risk factors)', chc: 2, pop: 1, imp: 1, dmpa: 1, lng: 1, cu: 1 }
+    ],
+    note: 'UKMEC 2025 upgraded DMPA to Category 3 in the postpartum window where other VTE risk factors are present. IUC insertion between 48 hours and 4 weeks postpartum is Category 3 in CoSRH guidance.',
+    source: 'CoSRH UKMEC 2025'
+  },
+  {
+    id: 'sle-apl',
+    title: 'SLE with antiphospholipid antibodies',
+    trigger: f => f.flags.sleApl,
+    rows: [
+      { desc: 'SLE with positive or unknown antiphospholipid antibodies', chc: 4, pop: 3, imp: 3, dmpa: 3, lng: 3, cu: 1 },
+      { desc: 'SLE with negative antiphospholipid antibodies',      chc: 2, pop: 2, imp: 2, dmpa: 2, lng: 2, cu: 1 }
+    ],
+    source: 'CoSRH UKMEC 2025'
+  },
+  {
+    id: 'enzyme',
+    title: 'Enzyme-inducing drugs',
+    trigger: f => f.flags.enzyme,
+    rows: [
+      { desc: 'On enzyme-inducing drugs (e.g. carbamazepine, phenytoin, rifampicin, St John\'s wort)', chc: 3, pop: 3, imp: 2, dmpa: 1, lng: 1, cu: 1 }
+    ],
+    note: 'DMPA, LNG-IUS and Cu-IUD efficacy are not reduced by enzyme inducers. For the implant, additional contraception is recommended during use.',
+    source: 'CoSRH UKMEC 2025'
+  },
+  {
+    id: 'pid',
+    title: 'Current PID or purulent cervicitis',
+    trigger: f => f.flags.pid,
+    rows: [
+      { desc: 'Current PID — initiation of IUC',                    chc: null, pop: null, imp: null, dmpa: null, lng: 4, cu: 4 },
+      { desc: 'Current PID — continuation of existing IUC',         chc: null, pop: null, imp: null, dmpa: null, lng: 2, cu: 2 }
+    ],
+    note: 'Applies to intrauterine contraceptive (IUC) insertion. Treat the infection; insertion is generally deferred.',
+    source: 'CoSRH UKMEC 2025'
+  },
+  {
+    id: 'cavity',
+    title: 'Distorted uterine cavity',
+    trigger: f => f.flags.cavity,
+    rows: [
+      { desc: 'Distorted uterine cavity (e.g. fibroids distorting cavity, congenital anomaly)', chc: null, pop: null, imp: null, dmpa: null, lng: 4, cu: 4 }
+    ],
+    source: 'CoSRH UKMEC 2025'
+  },
+  {
+    id: 'bleeding',
+    title: 'Unexplained vaginal bleeding',
+    trigger: f => f.flags.bleeding,
+    rows: [
+      { desc: 'Unexplained vaginal bleeding (suspicious for serious cause, before evaluation)', chc: 2, pop: 2, imp: 3, dmpa: 3, lng: 4, cu: 4 }
+    ],
+    note: 'Applies before evaluation. Once a cause has been identified and treated, ratings are reassessed per the specific condition.',
+    source: 'CoSRH UKMEC 2025'
+  },
+  {
+    id: 'wilson',
+    title: 'Wilson\'s disease',
+    trigger: f => f.flags.wilson,
+    rows: [
+      { desc: 'Wilson\'s disease',                                   chc: 1, pop: 1, imp: 1, dmpa: 1, lng: 1, cu: 4 }
+    ],
+    note: 'Copper IUDs are contraindicated due to copper toxicity in Wilson\'s disease.',
+    source: 'CoSRH UKMEC 2025'
+  },
+  {
+    id: 'ms',
+    title: 'Multiple sclerosis',
+    tag: 'New in 2025',
+    trigger: f => f.ms && f.ms !== 'none',
+    rows: [
+      { desc: 'MS without prolonged immobility',                    chc: 1, pop: 1, imp: 1, dmpa: 2, lng: 1, cu: 1 },
+      { desc: 'MS with prolonged immobility',                       chc: 3, pop: 1, imp: 1, dmpa: 3, lng: 1, cu: 1 }
+    ],
+    note: 'MS is associated with ~1.2x increased fracture risk; relevant to DMPA. Prolonged immobility increases VTE risk and is relevant to CHC.',
+    source: 'CoSRH UKMEC 2025'
+  },
+  {
+    id: 'ckd',
+    title: 'Chronic kidney disease',
+    tag: 'New in 2025',
+    trigger: f => f.ckd && f.ckd !== 'none',
+    rows: [
+      { desc: 'CKD stages 1–2',                                     chc: 2, pop: 1, imp: 1, dmpa: 2, lng: 1, cu: 1 },
+      { desc: 'CKD stages 3–5',                                     chc: 3, pop: 1, imp: 1, dmpa: 2, lng: 1, cu: 1 }
+    ],
+    note: 'CKD is associated with increased VTE risk across all stages in UKMEC 2025; bone health considerations apply to DMPA.',
+    source: 'CoSRH UKMEC 2025'
+  },
+  {
+    id: 'sct',
+    title: 'Sickle cell trait',
+    tag: 'New in 2025',
+    trigger: f => f.flags.sct,
+    rows: [],
+    note: 'UKMEC 2025 added sickle cell trait but notes there is insufficient evidence to assign formal categories. CoSRH highlights a small associated VTE risk and suggests considering alternatives to CHC. Refer to the full guidance for the published wording.',
+    source: 'CoSRH UKMEC 2025'
+  },
+  {
+    id: 'hiv',
+    title: 'HIV',
+    tag: 'Updated 2025',
+    trigger: f => f.hiv && f.hiv !== 'none',
+    rows: [
+      { desc: 'HIV, clinically well, on ART',                       chc: 1, pop: 1, imp: 1, dmpa: 1, lng: 2, cu: 2 },
+      { desc: 'HIV, clinically unwell or not on treatment',         chc: 2, pop: 1, imp: 1, dmpa: 2, lng: 2, cu: 2 }
+    ],
+    note: 'UKMEC 2025 categorises by clinical status and treatment rather than CD4 count. IUC ratings shown are for initiation. Check specific ART regimens for enzyme interactions separately.',
+    source: 'CoSRH UKMEC 2025'
+  }
 ];
 
 function calcBMI(h, w) {
@@ -829,7 +1043,7 @@ function calcBMI(h, w) {
   return w / (m * m);
 }
 
-function getData() {
+function getFilters() {
   const v = id => {
     const el = document.getElementById(id);
     return el ? (el.value || '') : '';
@@ -838,7 +1052,7 @@ function getData() {
     const x = parseFloat(v(id));
     return isNaN(x) ? null : x;
   };
-  const flag = name => !!document.querySelector(`[data-flag="${name}"]:checked`);
+  const flag = name => !!document.querySelector('[data-flag="' + name + '"]:checked');
 
   return {
     age: num('age'),
@@ -875,375 +1089,103 @@ function getData() {
   };
 }
 
-// Each rule returns { cat: 1-4, reason: '...' } or null
-function evaluate(p) {
-  const results = {};
-  for (const m of METHODS) {
-    results[m.key] = { highest: 1, reasons: [] };
-  }
-
-  function add(methodKey, cat, reason) {
-    const r = results[methodKey];
-    if (cat > r.highest) r.highest = cat;
-    if (cat >= 2) r.reasons.push({ cat, text: reason });
-  }
-
-  // ---------- Age ----------
-  if (p.age !== null && p.age >= 35) {
-    if (p.smoking === 'heavy') {
-      add('chc', 4, 'Age ≥35 and smoking ≥15/day');
-    } else if (p.smoking === 'light' || p.smoking === 'ex-short') {
-      add('chc', 3, 'Age ≥35 with current smoking <15/day or quit <1 year ago');
-    } else if (p.smoking === 'ex-long') {
-      add('chc', 2, 'Age ≥35, stopped smoking ≥1 year ago');
-    }
-  } else if (p.age !== null && p.age < 35 && (p.smoking === 'light' || p.smoking === 'heavy')) {
-    add('chc', 2, 'Current smoker under age 35');
-  }
-
-  // Age ≥35 for migraine
-  // Age >45 caveats for DMPA
-  if (p.age !== null && p.age >= 50) {
-    add('dmpa', 2, 'Age ≥50 — reassess use; alternatives generally preferred');
-  }
-
-  // ---------- BMI ----------
-  if (p.bmi !== null) {
-    if (p.bmi >= 35) {
-      add('chc', 3, `BMI ${p.bmi.toFixed(1)} kg/m² (≥35)`);
-      add('dmpa', 2, `BMI ${p.bmi.toFixed(1)} kg/m² (≥35) — upgraded in UKMEC 2025 due to VTE evidence`);
-    } else if (p.bmi >= 30) {
-      add('chc', 2, `BMI ${p.bmi.toFixed(1)} kg/m² (30–34.9)`);
-    }
-  }
-
-  // ---------- Blood pressure (NICE classification, UKMEC 2025) ----------
-  // Home/ABPM thresholds are 5 mmHg lower than clinic.
-  const sbp = p.sbp, dbp = p.dbp;
-  if (sbp !== null || dbp !== null) {
-    const isHome = p.bpSource === 'home';
-    const stage1Sys = isHome ? 135 : 140;   // NICE Stage 1 systolic threshold
-    const stage1Dia = isHome ? 85 : 90;
-    const stage2Sys = isHome ? 150 : 160;   // NICE Stage 2 systolic threshold
-    const stage2Dia = isHome ? 95 : 100;
-
-    const stage2 = (sbp !== null && sbp >= stage2Sys) || (dbp !== null && dbp >= stage2Dia);
-    const stage1 = !stage2 && (
-      (sbp !== null && sbp >= stage1Sys) || (dbp !== null && dbp >= stage1Dia)
-    );
-
-    const bpLabel = `BP ${sbp ?? '—'}/${dbp ?? '—'} (${isHome ? 'home' : 'clinic'})`;
-    if (stage2) {
-      add('chc', 4, `${bpLabel} — NICE Stage 2 hypertension`);
-      add('dmpa', 3, `${bpLabel} — Stage 2 hypertension`);
-    } else if (stage1) {
-      add('chc', 3, `${bpLabel} — NICE Stage 1 hypertension`);
-      add('dmpa', 2, `${bpLabel} — Stage 1 hypertension`);
-    }
-  }
-
-  // ---------- VTE / thrombophilia / surgery ----------
-  if (p.flags.vte) {
-    add('chc', 4, 'Personal history of VTE');
-    add('pop', 2, 'Personal history of VTE (acute VTE on anticoagulation = 2)');
-    add('imp', 2, 'Personal history of VTE');
-    add('dmpa', 2, 'Personal history of VTE');
-    add('lng', 2, 'Personal history of VTE');
-  }
-  if (p.flags.thrombophilia) {
-    add('chc', 4, 'Known thrombogenic mutation');
-    add('pop', 2, 'Known thrombogenic mutation');
-    add('imp', 2, 'Known thrombogenic mutation');
-    add('dmpa', 3, 'Known thrombogenic mutation — upgraded to UKMEC 3 in 2025 (DMPA-VTE evidence)');
-    add('lng', 2, 'Known thrombogenic mutation');
-  }
-  if (p.flags.surgery) {
-    add('chc', 4, 'Major surgery with prolonged immobilisation');
-  }
-
-  // ---------- IHD / Stroke ----------
-  if (p.flags.ihd) {
-    add('chc', 4, 'Ischaemic heart disease');
-    add('pop', 3, 'IHD — initiation 2, continuation 3');
-    add('imp', 3, 'IHD — initiation 2, continuation 3');
-    add('dmpa', 3, 'IHD with DMPA — hypoestrogenic effects');
-    add('lng', 3, 'IHD — initiation 2, continuation 3');
-  }
-  if (p.flags.stroke) {
-    add('chc', 4, 'Stroke / TIA');
-    add('pop', 2, 'Stroke — initiation 2, continuation 3');
-    add('imp', 2, 'Stroke — initiation 2, continuation 3');
-    add('dmpa', 3, 'Stroke with DMPA');
-    add('lng', 2, 'Stroke — UKMEC 2025 removed the UKMEC 3 continuation rating for LNG-IUD');
-  }
-  if (p.flags.multiCV) {
-    add('chc', 3, 'Multiple cardiovascular risk factors (UKMEC 3/4; assess overall risk)');
-    add('dmpa', 3, 'Multiple cardiovascular risk factors with DMPA');
-    add('pop', 2, 'Multiple cardiovascular risk factors');
-    add('imp', 2, 'Multiple cardiovascular risk factors');
-    add('lng', 2, 'Multiple cardiovascular risk factors');
-  }
-
-  // ---------- Migraine ----------
-  if (p.migraine === 'with') {
-    add('chc', 4, 'Migraine with aura (any age)');
-    add('pop', 2, 'Migraine with aura — initiation 2, continuation 3');
-    add('imp', 2, 'Migraine with aura — initiation 2, continuation 3');
-    add('dmpa', 2, 'Migraine with aura — initiation 2, continuation 3');
-    add('lng', 2, 'Migraine with aura — initiation 2, continuation 3');
-  } else if (p.migraine === 'without') {
-    if (p.age !== null && p.age >= 35) {
-      add('chc', 3, 'Migraine without aura, age ≥35 (initiation 3, continuation 4)');
-    } else {
-      add('chc', 2, 'Migraine without aura, age <35 (initiation 2, continuation 3)');
-    }
-  }
-
-  // ---------- Diabetes ----------
-  if (p.diabetes === 'uncomplicated') {
-    add('chc', 2, 'Diabetes without complications');
-    add('dmpa', 2, 'Diabetes without complications');
-  } else if (p.diabetes === 'complicated') {
-    add('chc', 3, 'Diabetes with vascular complications or >20 years duration (UKMEC 3/4)');
-    add('dmpa', 3, 'Diabetes with vascular complications or long duration');
-    add('pop', 2, 'Diabetes with complications');
-    add('imp', 2, 'Diabetes with complications');
-    add('lng', 2, 'Diabetes with complications');
-  }
-
-  // ---------- Breast cancer ----------
-  if (p.breast === 'current') {
-    add('chc', 4, 'Current breast cancer');
-    add('pop', 4, 'Current breast cancer');
-    add('imp', 4, 'Current breast cancer');
-    add('dmpa', 4, 'Current breast cancer');
-    add('lng', 4, 'Current breast cancer');
-  } else if (p.breast === 'past') {
-    add('chc', 3, 'Past breast cancer (no recurrence ≥5 years)');
-    add('pop', 3, 'Past breast cancer');
-    add('imp', 3, 'Past breast cancer');
-    add('dmpa', 3, 'Past breast cancer');
-    add('lng', 3, 'Past breast cancer');
-  }
-
-  // ---------- Liver disease ----------
-  if (p.liver === 'mild') {
-    add('chc', 3, 'Mild compensated cirrhosis or acute viral hepatitis');
-    add('pop', 2, 'Mild liver disease');
-    add('imp', 2, 'Mild liver disease');
-    add('dmpa', 2, 'Mild liver disease');
-    add('lng', 2, 'Mild liver disease');
-  } else if (p.liver === 'severe') {
-    add('chc', 4, 'Decompensated cirrhosis or hepatocellular adenoma/carcinoma');
-    add('pop', 3, 'Severe liver disease');
-    add('imp', 3, 'Severe liver disease');
-    add('dmpa', 3, 'Severe liver disease');
-    add('lng', 3, 'Severe liver disease');
-  }
-
-  // ---------- Postpartum ----------
-  switch (p.postpartum) {
-    case 'pp-under6w-bf':
-      add('chc', 4, 'Postpartum, breastfeeding, <6 weeks');
-      add('dmpa', 3, 'Postpartum <6 weeks with VTE risk factors — DMPA upgraded to 3 in UKMEC 2025');
-      add('lng', 2, 'IUC insertion 48hr–4 weeks postpartum = UKMEC 3');
-      add('cu', 2, 'IUC insertion 48hr–4 weeks postpartum = UKMEC 3');
-      break;
-    case 'pp-6w-6m-bf':
-      add('chc', 2, 'Postpartum, breastfeeding, 6 weeks–6 months');
-      break;
-    case 'pp-under3-nobf':
-      add('chc', 3, 'Postpartum <3 weeks, not breastfeeding (UKMEC 3 without other VTE RF, 4 with)');
-      add('dmpa', 3, 'Postpartum <3 weeks with other VTE risk factors — DMPA upgraded to 3 in UKMEC 2025');
-      add('lng', 2, 'IUC insertion 48hr–4 weeks postpartum = UKMEC 3');
-      add('cu', 2, 'IUC insertion 48hr–4 weeks postpartum = UKMEC 3');
-      break;
-    case 'pp-3to6-nobf':
-      add('chc', 2, 'Postpartum 3–6 weeks, not breastfeeding, no other VTE risk factors');
-      break;
-  }
-
-  // ---------- SLE with antiphospholipid ----------
-  if (p.flags.sleApl) {
-    add('chc', 4, 'SLE with positive/unknown antiphospholipid antibodies');
-    add('pop', 3, 'SLE with positive antiphospholipid antibodies');
-    add('imp', 3, 'SLE with positive antiphospholipid antibodies');
-    add('dmpa', 3, 'SLE with positive antiphospholipid antibodies');
-    add('lng', 3, 'SLE with positive antiphospholipid antibodies');
-  }
-
-  // ---------- Enzyme inducers ----------
-  if (p.flags.enzyme) {
-    add('chc', 3, 'Enzyme-inducing drugs reduce CHC efficacy');
-    add('pop', 3, 'Enzyme-inducing drugs reduce POP efficacy');
-    add('imp', 2, 'Enzyme inducers reduce implant levels — additional contraception required');
-    // DMPA, LNG-IUS, Cu-IUD unaffected
-  }
-
-  // ---------- IUC-specific contraindications ----------
-  if (p.flags.pid) {
-    add('lng', 4, 'Current PID / purulent cervicitis (initiation)');
-    add('cu', 4, 'Current PID / purulent cervicitis (initiation)');
-  }
-  if (p.flags.cavity) {
-    add('lng', 4, 'Distorted uterine cavity');
-    add('cu', 4, 'Distorted uterine cavity');
-  }
-  if (p.flags.bleeding) {
-    add('lng', 4, 'Unexplained vaginal bleeding (before evaluation)');
-    add('cu', 4, 'Unexplained vaginal bleeding (before evaluation)');
-  }
-  if (p.flags.wilson) {
-    add('cu', 4, "Wilson's disease (copper contraindicated)");
-  }
-
-  // ---------- NEW IN UKMEC 2025: Multiple sclerosis ----------
-  if (p.ms === 'ms-mobile') {
-    add('chc', 1, '');
-    add('dmpa', 2, 'MS with ~1.2x fracture risk — DMPA bone health caution (new in UKMEC 2025)');
-  } else if (p.ms === 'ms-immobile') {
-    add('chc', 3, 'MS with prolonged immobility — elevated VTE risk (new in UKMEC 2025)');
-    add('dmpa', 3, 'MS with prolonged immobility — bone health + VTE concerns');
-    add('pop', 1, '');
-    add('imp', 1, '');
-    add('lng', 1, '');
-  }
-
-  // ---------- NEW IN UKMEC 2025: Chronic kidney disease ----------
-  if (p.ckd === 'ckd-mild') {
-    add('chc', 2, 'CKD stages 1–2 — small increase in VTE risk (new in UKMEC 2025)');
-    add('dmpa', 2, 'CKD — bone health consideration');
-  } else if (p.ckd === 'ckd-mod-severe') {
-    add('chc', 3, 'CKD stages 3–5 — CHC not suitable due to elevated VTE risk (new in UKMEC 2025)');
-    add('dmpa', 2, 'CKD stages 3–5 — bone health caution');
-    add('pop', 1, '');
-    add('imp', 1, '');
-    add('lng', 1, '');
-  }
-
-  // ---------- NEW IN UKMEC 2025: Sickle cell trait ----------
-  if (p.flags.sct) {
-    add('chc', 2, 'Sickle cell trait — small VTE risk; no formal UKMEC rating, consider alternatives to CHC (new in 2025)');
-  }
-
-  // ---------- HIV (UKMEC 2025: clinical status, not CD4) ----------
-  if (p.hiv === 'hiv-well') {
-    add('chc', 1, '');
-    add('dmpa', 1, '');
-  } else if (p.hiv === 'hiv-unwell') {
-    add('chc', 2, 'HIV, clinically unwell or untreated — UKMEC 2025 categorises by clinical status, not CD4');
-    add('dmpa', 2, 'HIV, clinically unwell or untreated');
-    add('pop', 1, '');
-    add('imp', 1, '');
-    add('lng', 2, 'IUC insertion in HIV, unwell/untreated = UKMEC 2');
-    add('cu', 2, 'IUC insertion in HIV, unwell/untreated = UKMEC 2');
-  }
-
-  return results;
+function getRelevantSections(filters) {
+  return SECTIONS.filter(s => {
+    try { return s.trigger(filters); } catch (e) { return false; }
+  });
 }
 
-// ---------- RENDER ----------
-function categoryLabel(c) {
-  return ({
-    1: 'UKMEC 1 — No restriction',
-    2: 'UKMEC 2 — Benefits outweigh risks',
-    3: 'UKMEC 3 — Risks usually outweigh benefits',
-    4: 'UKMEC 4 — Do not use'
-  })[c];
+function renderCell(val) {
+  if (val === null || val === undefined) {
+    return '<span class="cat-pill cna" title="Not applicable">—</span>';
+  }
+  return '<span class="cat-pill c' + val + '">' + val + '</span>';
 }
 
-function render(p, results) {
-  const root = document.getElementById('results-content');
-
-  const meta = [];
-  if (p.age !== null) meta.push(`<div><strong>Age</strong> ${p.age}</div>`);
-  if (p.bmi !== null) meta.push(`<div><strong>BMI</strong> ${p.bmi.toFixed(1)} kg/m²</div>`);
-  if (p.sbp !== null || p.dbp !== null) meta.push(`<div><strong>BP</strong> ${p.sbp ?? '—'}/${p.dbp ?? '—'} ${p.bpSource === 'home' ? '(home)' : '(clinic)'}</div>`);
-  if (p.smoking && p.smoking !== 'never') {
-    const map = { 'ex-long':'ex-smoker ≥1y', 'ex-short':'ex-smoker <1y', light:'<15/day', heavy:'≥15/day' };
-    meta.push(`<div><strong>Smoking</strong> ${map[p.smoking]}</div>`);
-  }
-
-  // Cumulative-risk check: UKMEC 2025 highlights that multiple UKMEC 2/3 factors
-  // for the same method may push overall risk higher.
-  const cumulativeWarnings = [];
-  for (const m of METHODS) {
-    const cat2plus = results[m.key].reasons.filter(r => r.cat >= 2);
-    if (cat2plus.length >= 2 && results[m.key].highest <= 3) {
-      cumulativeWarnings.push({
-        method: m.name,
-        count: cat2plus.length,
-        highest: results[m.key].highest
-      });
-    }
-  }
-
-  const cards = METHODS.map(m => {
-    const r = results[m.key];
-    const reasons = r.reasons.length
-      ? `<div class="reasons"><ul>${r.reasons.map(x => `<li><b>UKMEC ${x.cat}:</b> ${x.text}</li>`).join('')}</ul></div>`
-      : `<div class="reasons" style="margin-top:6px; font-size:12.5px; color: var(--ink-mute);">No restrictions identified for the entered factors.</div>`;
-    return `
-      <div class="method-card cat-${r.highest}">
-        <div class="method-head">
-          <div class="method-name">${m.name}<small>${m.sub}</small></div>
-          <span class="badge cat-${r.highest}"><span class="badge-dot"></span>${categoryLabel(r.highest)}</span>
-        </div>
-        ${reasons}
-      </div>`;
-  }).join('');
-
-  const cumulativeBlock = cumulativeWarnings.length
-    ? `<div style="background: var(--u3-bg); border-left: 3px solid var(--u3); padding: 12px 16px; border-radius: var(--radius); margin-bottom: 16px; font-size: 13px; color: var(--ink); line-height: 1.5;">
-        <strong style="display:block; margin-bottom: 4px; font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--u3);">Cumulative risk — UKMEC 2025</strong>
-        Multiple UKMEC 2 or 3 factors are present for ${cumulativeWarnings.map(w => w.method).join(', ')}. UKMEC 2025 emphasises that stacked risks may push overall safety beyond what any single category suggests. Apply clinical judgement.
-      </div>`
+function renderSection(s) {
+  const tag = s.tag ? '<span class="section-tag">' + s.tag + '</span>' : '';
+  const headerRow = '<tr><th>Condition</th>' +
+    METHODS.map(m => '<th>' + m.short + '</th>').join('') +
+    '</tr>';
+  const bodyRows = s.rows.map(r =>
+    '<tr><td>' + r.desc + '</td>' +
+    METHODS.map(m => '<td>' + renderCell(r[m.key]) + '</td>').join('') +
+    '</tr>'
+  ).join('');
+  const table = s.rows.length > 0
+    ? '<table class="criteria-table"><thead>' + headerRow + '</thead><tbody>' + bodyRows + '</tbody></table>'
     : '';
-
-  root.innerHTML = `
-    ${meta.length ? `<div class="computed-meta">${meta.join('')}</div>` : ''}
-    ${cumulativeBlock}
-    <div class="method-list">${cards}</div>
-    <div style="margin-top: 20px; padding: 12px 16px; background: var(--accent-soft); border-radius: var(--radius); font-size: 12px; color: var(--ink-soft); line-height: 1.55;">
-      <strong style="color: var(--ink);">Anxiety / mood disorders:</strong> UKMEC 2025 removed categorical ratings for these — evidence does not consistently show hormonal contraceptives worsen or improve them. Counsel individually and advise patients to monitor mood after starting.
-    </div>
-  `;
+  const note = s.note ? '<div class="section-note">' + s.note + '</div>' : '';
+  return '<div class="ref-section">' +
+    '<div class="section-title">' + s.title + tag + '</div>' +
+    '<div class="section-source">Source: ' + s.source + '</div>' +
+    table +
+    note +
+    '</div>';
 }
 
-// ---------- EVENT WIRING ----------
-document.getElementById('calculate').addEventListener('click', () => {
-  const p = getData();
-  const results = evaluate(p);
-  render(p, results);
-  // Scroll to top of eligibility summary (works on desktop and mobile)
+function renderFilterSummary(filters) {
+  const pills = [];
+  if (filters.age !== null) pills.push('<span class="filter-pill"><strong>Age</strong> ' + filters.age + '</span>');
+  if (filters.bmi !== null) pills.push('<span class="filter-pill"><strong>BMI</strong> ' + filters.bmi.toFixed(1) + '</span>');
+  if (filters.sbp !== null || filters.dbp !== null) {
+    pills.push('<span class="filter-pill"><strong>BP</strong> ' + (filters.sbp ?? '—') + '/' + (filters.dbp ?? '—') + ' ' + (filters.bpSource === 'home' ? '(home)' : '(clinic)') + '</span>');
+  }
+  if (filters.smoking && filters.smoking !== 'never') {
+    const map = { 'ex-long': 'ex-smoker ≥1y', 'ex-short': 'ex-smoker <1y', light: '<15/day', heavy: '≥15/day' };
+    pills.push('<span class="filter-pill"><strong>Smoking</strong> ' + map[filters.smoking] + '</span>');
+  }
+  return pills.length ? '<div class="filter-summary">' + pills.join('') + '</div>' : '';
+}
+
+function render(filters) {
+  const root = document.getElementById('results-content');
+  const sections = getRelevantSections(filters);
+
+  if (sections.length === 0) {
+    root.innerHTML = '<div class="results-empty">' +
+      '<div class="results-empty-icon">∅</div>' +
+      '<p>No UKMEC sections match the current filters. Try selecting one or more scenario factors on the left.</p>' +
+      '</div>';
+    return;
+  }
+
+  const summary = renderFilterSummary(filters);
+  const list = '<div class="section-list">' + sections.map(renderSection).join('') + '</div>';
+  const guidance = '<div style="margin-top: 20px; padding: 12px 16px; background: var(--accent-soft); border-radius: var(--radius); font-size: 12px; color: var(--ink-soft); line-height: 1.55;">' +
+    '<strong style="color: var(--ink);">Reading these tables:</strong> CoSRH UKMEC 2025 categories are listed as published. Initiation/continuation distinctions are noted where they apply. This view filters sections of the published guidance to those relevant to your scenario selections; it does not assess individual patients or recommend methods. Refer to the full CoSRH document for footnotes, exceptions, and clinical context.' +
+    '</div>';
+
+  root.innerHTML = summary + list + guidance;
+}
+
+document.getElementById('show').addEventListener('click', function () {
+  const filters = getFilters();
+  render(filters);
   const target = document.getElementById('results-panel');
   const targetTop = target.getBoundingClientRect().top + window.pageYOffset - 20;
   window.scrollTo({ top: targetTop, behavior: 'smooth' });
 });
 
-document.getElementById('reset').addEventListener('click', () => {
-  const form = document.getElementById('patient-form');
-  // Explicitly clear every input — more reliable than form.reset() on mobile
+document.getElementById('reset').addEventListener('click', function () {
+  const form = document.getElementById('filter-form');
   form.querySelectorAll('input[type="number"]').forEach(el => { el.value = ''; });
   form.querySelectorAll('input[type="checkbox"]').forEach(el => { el.checked = false; });
   form.querySelectorAll('select').forEach(el => { el.selectedIndex = 0; });
-  // Reset results panel
-  document.getElementById('results-content').innerHTML = `
-    <div class="results-empty">
-      <div class="results-empty-icon">∅</div>
-      <p>Enter patient factors and press <strong>Calculate eligibility</strong> to see the UKMEC summary.</p>
-    </div>`;
-  // Scroll to top of eligibility summary
+  document.getElementById('results-content').innerHTML =
+    '<div class="results-empty">' +
+    '<div class="results-empty-icon">∅</div>' +
+    '<p>Select filters on the left, then press <strong>Show UKMEC criteria</strong> to view the relevant published sections.</p>' +
+    '</div>';
   const target = document.getElementById('results-panel');
   const targetTop = target.getBoundingClientRect().top + window.pageYOffset - 20;
   window.scrollTo({ top: targetTop, behavior: 'smooth' });
 });
 
-// Allow Enter key submission
-document.getElementById('patient-form').addEventListener('keydown', e => {
+document.getElementById('filter-form').addEventListener('keydown', function (e) {
   if (e.key === 'Enter' && e.target.tagName !== 'BUTTON') {
     e.preventDefault();
-    document.getElementById('calculate').click();
+    document.getElementById('show').click();
   }
 });
 </script>
