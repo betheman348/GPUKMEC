@@ -1,2 +1,0 @@
-# GPUKMEC
-UKMEC calculator
