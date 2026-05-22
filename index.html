@@ -3,9 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GP Tools — Clinical decision support for UK general practice</title>
-<meta name="google-site-verification" content="nAbtK_OUGYdwkpjUh0pS-nDKyWaTz_OVZNI9GKkw1l0" />  
-<meta name="description" content="A growing collection of free, evidence-based clinical decision-support tools for UK general practice. Built by a GP, for GPs.">
+<title>GP Tools — Educational references for UK general practice</title>
+<meta name="google-site-verification" content="nAbtK_OUGYdwkpjUh0pS-nDKyWaTz_OVZNI9GKkw1l0" />
+<meta name="description" content="A growing collection of free, evidence-based educational references for UK general practice. Built by a GP, for GPs. Not medical devices.">
+<meta name="author" content="Dr BN">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="GP Tools — Educational references for UK general practice">
+<meta property="og:description" content="Free educational references for UK clinicians.">
+<meta property="og:type" content="website">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
@@ -67,46 +72,53 @@
     font-size: 22px; letter-spacing: -0.01em; margin-bottom: 6px;
   }
   .tool p { color: var(--ink-soft); font-size: 14.5px; }
-  .coming-soon {
-    border-style: dashed; opacity: 0.7; cursor: default;
-  }
+  .coming-soon { border-style: dashed; opacity: 0.7; cursor: default; }
   .coming-soon:hover { transform: none; border-color: var(--line); }
   footer {
     margin-top: 64px; padding-top: 24px; border-top: 1px solid var(--line);
     font-size: 13px; color: var(--ink-mute); line-height: 1.6;
   }
-  footer strong { color: var(--ink); }
+  footer strong { color: var(--ink); display: block; margin-bottom: 4px; }
   footer a { color: var(--accent); text-decoration: none; }
   footer a:hover { text-decoration: underline; }
+  .footer-section { margin-bottom: 16px; }
 </style>
 </head>
 <body>
   <div class="container">
-    <div class="eyebrow">Clinical decision support for UK general practice</div>
-    <h1>GP <em>tools</em></h1>
-    <p class="lead">A growing collection of free, evidence-based clinical decision-support tools built by a UK GP, for UK clinicians. No tracking, no ads, no sign-up.</p>
+    <div class="eyebrow">Educational references for UK general practice</div>
+    <h1>GP <em>Tools</em></h1>
+    <p class="lead">A growing collection of free, evidence-based educational references for UK clinicians. Surfaces published guidance; does not make clinical assessments. No tracking, no ads, no sign-up.</p>
 
     <div class="tools">
       <a href="/contraception/" class="tool">
-        <span class="tool-tag">UKMEC 2025</span>
-        <h2>Contraceptive eligibility calculator</h2>
-        <p>Implements the CoSRH UKMEC 2025 framework across the six main contraceptive methods. For UK healthcare professionals.</p>
+        <span class="tool-tag">Reference · UKMEC 2025</span>
+        <h2>UKMEC 2025 Reference</h2>
+        <p>An interactive way to view the CoSRH UKMEC 2025 contraceptive eligibility criteria. Filter by scenario to surface the relevant published sections. For UK healthcare professionals.</p>
       </a>
       <div class="tool coming-soon">
         <span class="tool-tag">In development</span>
-        <h2>More tools coming</h2>
+        <h2>More references coming</h2>
         <p>Feedback and suggestions welcome.</p>
       </div>
     </div>
 
     <footer>
-      <strong>About</strong><br>
-      Built by Dr BN, GP. Tools are clinical decision support, not medical devices, and do not replace clinical judgement.<br><br>
-      <strong>Contact</strong><br>
-      <a href="mailto:feedback@gp-tools.uk">feedback@gp-tools.uk</a> — feedback, suggestions, and clinical corrections welcome.<br><br>
-      <strong>Privacy</strong><br>
-      No cookies. No analytics. No tracking. All calculations run in your browser.<br><br>
-      © 2026 BN. All rights reserved.
+      <div class="footer-section">
+        <strong>About</strong>
+        Built by Dr BN, GP. Tools on this site are educational references that surface published guidance for UK clinicians. They are not medical devices, do not make patient-specific assessments, and do not replace clinical judgement.
+      </div>
+      <div class="footer-section">
+        <strong>Contact</strong>
+        <a href="mailto:feedback@gp-tools.uk">feedback@gp-tools.uk</a> — feedback, suggestions, and corrections welcome.
+      </div>
+      <div class="footer-section">
+        <strong>Privacy</strong>
+        No cookies. No analytics. No tracking. Everything runs in your browser.
+      </div>
+      <div class="footer-section">
+        © 2026 Dr BN &nbsp;·&nbsp; Educational references, not medical devices
+      </div>
     </footer>
   </div>
 </body>
