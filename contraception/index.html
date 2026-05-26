@@ -83,8 +83,8 @@
   .top-nav-text em { font-style: italic; color: var(--accent); font-weight: 400; }
   header {
     border-bottom: 1px solid var(--line);
-    padding-bottom: 24px;
-    margin-bottom: 32px;
+    padding-bottom: 20px;
+    margin-bottom: 24px;
   }
   .eyebrow {
     font-size: 11px;
@@ -126,7 +126,7 @@
     background: var(--paper);
     border: 1px solid var(--line);
     border-radius: var(--radius-lg);
-    padding: 28px;
+    padding: 22px 24px;
   }
   .panel-title {
     font-family: 'Fraunces', Georgia, serif;
@@ -352,6 +352,37 @@
     margin-left: 4px;
     vertical-align: middle;
     white-space: nowrap;
+  }
+  .legend-strip {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px 14px;
+    padding: 10px 14px;
+    background: var(--accent-soft);
+    border-radius: var(--radius);
+    margin-bottom: 18px;
+    font-size: 12px;
+    color: var(--ink-soft);
+    line-height: 1.4;
+  }
+  .legend-strip-label {
+    font-weight: 600;
+    color: var(--ink);
+    font-size: 10.5px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding-right: 4px;
+    border-right: 1px solid var(--line);
+  }
+  .legend-strip-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    white-space: nowrap;
+  }
+  @media (max-width: 600px) {
+    .legend-strip-label { border-right: none; width: 100%; padding-right: 0; padding-bottom: 2px; }
   }
   .legend {
     background: var(--paper);
@@ -669,48 +700,22 @@
         </form>
       </section>
       <section class="panel" id="results-panel">
-        <h2 class="panel-title">Relevant UKMEC sections</h2>
-        <p class="panel-sub">Sections of UKMEC 2025 relevant to your selected filters. Categories shown are CoSRH's published wording.</p>
+        <h2 class="panel-title">Relevant UKMEC criteria</h2>
+        <p class="panel-sub">Published UKMEC 2025 rows matching your selected filters. Categories shown are CoSRH's published wording.</p>
+        <div class="legend-strip" aria-label="UKMEC category key">
+          <span class="legend-strip-label">UKMEC key</span>
+          <span class="legend-strip-item"><span class="cat-pill c1">1</span> No restriction</span>
+          <span class="legend-strip-item"><span class="cat-pill c2">2</span> Advantages outweigh risks</span>
+          <span class="legend-strip-item"><span class="cat-pill c3">3</span> Risks usually outweigh</span>
+          <span class="legend-strip-item"><span class="cat-pill c4">4</span> Unacceptable risk</span>
+        </div>
         <div id="results-content">
           <div class="results-empty">
             <div class="results-empty-icon">∅</div>
-            <p>Select filters on the left, then press <strong>Show UKMEC criteria</strong> to view the relevant published sections.</p>
+            <p>Select filters on the left, then press <strong>Show UKMEC criteria</strong> to view the matching rows from UKMEC 2025.</p>
           </div>
         </div>
       </section>
-    </div>
-    <div class="legend">
-      <div class="legend-title">UKMEC categories (CoSRH definitions)</div>
-      <div class="legend-grid">
-        <div class="legend-item">
-          <div class="legend-num cat-1">1</div>
-          <div class="legend-text">
-            <strong>Category 1</strong>
-            A condition for which there is no restriction for the use of the method.
-          </div>
-        </div>
-        <div class="legend-item">
-          <div class="legend-num cat-2">2</div>
-          <div class="legend-text">
-            <strong>Category 2</strong>
-            A condition where the advantages of using the method generally outweigh the theoretical or proven risks.
-          </div>
-        </div>
-        <div class="legend-item">
-          <div class="legend-num cat-3">3</div>
-          <div class="legend-text">
-            <strong>Category 3</strong>
-            A condition where the theoretical or proven risks usually outweigh the advantages of using the method. The provision of a method requires expert clinical judgement.
-          </div>
-        </div>
-        <div class="legend-item">
-          <div class="legend-num cat-4">4</div>
-          <div class="legend-text">
-            <strong>Category 4</strong>
-            A condition which represents an unacceptable health risk if the method is used.
-          </div>
-        </div>
-      </div>
     </div>
     <footer>
       <div class="footer-grid">
@@ -1058,15 +1063,75 @@ function renderCell(val) {
 
 function renderFilterSummary(filters) {
   const pills = [];
-  if (filters.age !== null) pills.push('<span class="filter-pill"><strong>Age</strong> ' + filters.age + '</span>');
-  if (filters.bmi !== null) pills.push('<span class="filter-pill"><strong>BMI</strong> ' + filters.bmi.toFixed(1) + '</span>');
+  const pill = (label, value) => pills.push('<span class="filter-pill"><strong>' + label + '</strong> ' + value + '</span>');
+
+  // Demographics & vitals
+  if (filters.age !== null) pill('Age', filters.age);
+  if (filters.bmi !== null) pill('BMI', filters.bmi.toFixed(1));
   if (filters.sbp !== null || filters.dbp !== null) {
-    pills.push('<span class="filter-pill"><strong>BP</strong> ' + (filters.sbp !== null ? filters.sbp : '—') + '/' + (filters.dbp !== null ? filters.dbp : '—') + ' ' + (filters.bpSource === 'home' ? '(home)' : '(clinic)') + '</span>');
+    const s = filters.sbp !== null ? filters.sbp : '—';
+    const d = filters.dbp !== null ? filters.dbp : '—';
+    pill('BP', s + '/' + d + ' ' + (filters.bpSource === 'home' ? '(home)' : '(clinic)'));
   }
   if (filters.smoking && filters.smoking !== 'never') {
-    const map = { 'ex-long': 'ex-smoker ≥1y', 'ex-short': 'ex-smoker <1y', light: '<15/day', heavy: '≥15/day' };
-    pills.push('<span class="filter-pill"><strong>Smoking</strong> ' + map[filters.smoking] + '</span>');
+    const map = { 'ex-long': 'ex-smoker ≥1y', 'ex-short': 'ex-smoker &lt;1y', light: '&lt;15/day', heavy: '≥15/day' };
+    pill('Smoking', map[filters.smoking]);
   }
+
+  // Dropdown selections
+  if (filters.migraine && filters.migraine !== 'none') {
+    pill('Migraine', filters.migraine === 'with' ? 'with aura' : 'without aura');
+  }
+  if (filters.ms && filters.ms !== 'none') {
+    pill('MS', filters.ms === 'ms-immobile' ? 'with immobility' : 'mobile');
+  }
+  if (filters.diabetes && filters.diabetes !== 'none') {
+    pill('Diabetes', filters.diabetes === 'complicated' ? 'with complications' : 'uncomplicated');
+  }
+  if (filters.breast && filters.breast !== 'none') {
+    pill('Breast cancer', filters.breast === 'current' ? 'current / on treatment' : 'past, no recurrence ≥5y');
+  }
+  if (filters.liver && filters.liver !== 'none') {
+    pill('Liver disease', filters.liver === 'severe' ? 'severe' : 'mild');
+  }
+  if (filters.postpartum && filters.postpartum !== 'none') {
+    const ppMap = {
+      'pp-under3-nobf': 'no BF, &lt;3w',
+      'pp-3to6-nobf':   'no BF, 3–6w',
+      'pp-under6w-bf':  'BF, &lt;6w',
+      'pp-6w-6m-bf':    'BF, 6w–6m'
+    };
+    pill('Postpartum', ppMap[filters.postpartum] || filters.postpartum);
+  }
+  if (filters.ckd && filters.ckd !== 'none') {
+    pill('CKD', filters.ckd === 'ckd-mod-severe' ? 'stages 3–5' : 'stages 1–2');
+  }
+  if (filters.hiv && filters.hiv !== 'none') {
+    pill('HIV', filters.hiv === 'hiv-unwell' ? 'unwell / not on ART' : 'well, on ART');
+  }
+
+  // Checkbox flags
+  const flagLabels = {
+    vte: 'VTE history',
+    thrombophilia: 'Thrombogenic mutation',
+    ihd: 'IHD',
+    stroke: 'Stroke / TIA',
+    multiCV: 'Multiple CV risk factors',
+    surgery: 'Major surgery + immobility',
+    sleApl: 'SLE with APL antibodies',
+    enzyme: 'Enzyme inducers',
+    pid: 'PID',
+    cavity: 'Distorted cavity',
+    bleeding: 'Unexplained bleeding',
+    wilson: "Wilson's disease",
+    sct: 'Sickle cell trait'
+  };
+  Object.keys(flagLabels).forEach(k => {
+    if (filters.flags[k]) {
+      pills.push('<span class="filter-pill">' + flagLabels[k] + '</span>');
+    }
+  });
+
   return pills.length ? '<div class="filter-summary">' + pills.join('') + '</div>' : '';
 }
 
