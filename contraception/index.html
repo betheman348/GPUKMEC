@@ -393,6 +393,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const showBtn = document.getElementById('show');
   const resetBtn = document.getElementById('reset');
   const resultsContent = document.getElementById('results-content');
+  const resultsPanel = document.getElementById('results-panel'); // Added reference
   const form = document.getElementById('filter-form');
 
   showBtn.addEventListener('click', () => {
@@ -429,54 +430,56 @@ document.addEventListener('DOMContentLoaded', () => {
           <div class="results-empty-icon">∅</div>
           <p>Select filters on the left, then press <strong>Show UKMEC criteria</strong> to view the matching rows from UKMEC 2025.</p>
         </div>`;
-      return;
-    }
-
-    const matches = FACTORS.filter(factor => factor.match(f));
-
-    if (matches.length === 0) {
-      resultsContent.innerHTML = `
-        <div style="background: var(--u1-bg); border: 1px solid var(--line); border-left: 4px solid var(--u1); padding: 20px; border-radius: var(--radius); color: var(--ink); margin-top: 10px;">
-          <h3 style="color: var(--u1); font-family: 'Fraunces', serif; font-size: 18px; margin-bottom: 6px;">Baseline Eligibility</h3>
-          <p style="font-size: 13.5px; line-height: 1.5; color: var(--ink-soft);">
-            <strong>CoSRH Guideline Reference:</strong> In the absence of specified medical conditions, risk factors, or interacting medications, the CoSRH framework categorizes contraceptive methods as <strong>UKMEC 1</strong> (A condition for which there is no restriction for the use of the contraceptive method).
-          </p>
-          <p style="font-size: 12px; color: var(--ink-mute); margin-top: 10px; border-top: 1px solid rgba(0,0,0,0.05); padding-top: 8px;">
-            Note: This educational tool surfaces explicit UKMEC criteria rows. Always refer to the full BNF and clinical guidelines to ensure no unlisted contraindications exist prior to prescribing.
-          </p>
-        </div>`;
     } else {
-      let tableRows = matches.map(m => `
-        <tr>
-          <td>${m.desc} ${m.tag ? `<span class="row-tag">${m.tag}</span>` : ''}</td>
-          <td><span class="cat-pill c${m.chc}">${m.chc}</span></td>
-          <td><span class="cat-pill c${m.pop}">${m.pop}</span></td>
-          <td><span class="cat-pill c${m.imp}">${m.imp}</span></td>
-          <td><span class="cat-pill c${m.dmpa}">${m.dmpa}</span></td>
-          <td><span class="cat-pill c${m.lng}">${m.lng}</span></td>
-          <td><span class="cat-pill c${m.cu}">${m.cu}</span></td>
-        </tr>
-      `).join('');
+      const matches = FACTORS.filter(factor => factor.match(f));
 
-      resultsContent.innerHTML = `
-        <div class="ref-section">
-          <h3 class="section-title">Guideline Matches</h3>
-          <table class="criteria-table">
-            <thead>
-              <tr>
-                <th>Condition</th>
-                <th>CHC</th>
-                <th>POP</th>
-                <th>IMP</th>
-                <th>DMPA</th>
-                <th>LNG</th>
-                <th>Cu</th>
-              </tr>
-            </thead>
-            <tbody>${tableRows}</tbody>
-          </table>
-        </div>`;
+      if (matches.length === 0) {
+        resultsContent.innerHTML = `
+          <div style="background: var(--u1-bg); border: 1px solid var(--line); border-left: 4px solid var(--u1); padding: 20px; border-radius: var(--radius); color: var(--ink); margin-top: 10px;">
+            <h3 style="color: var(--u1); font-family: 'Fraunces', serif; font-size: 18px; margin-bottom: 6px;">Baseline Eligibility</h3>
+            <p style="font-size: 13.5px; line-height: 1.5; color: var(--ink-soft);">
+              <strong>CoSRH Guideline Reference:</strong> In the absence of specified medical conditions, risk factors, or interacting medications, the CoSRH framework categorizes contraceptive methods as <strong>UKMEC 1</strong> (A condition for which there is no restriction for the use of the contraceptive method).
+            </p>
+            <p style="font-size: 12px; color: var(--ink-mute); margin-top: 10px; border-top: 1px solid rgba(0,0,0,0.05); padding-top: 8px;">
+              Note: This educational tool surfaces explicit UKMEC criteria rows. Always refer to the full BNF and clinical guidelines to ensure no unlisted contraindications exist prior to prescribing.
+            </p>
+          </div>`;
+      } else {
+        let tableRows = matches.map(m => `
+          <tr>
+            <td>${m.desc} ${m.tag ? `<span class="row-tag">${m.tag}</span>` : ''}</td>
+            <td><span class="cat-pill c${m.chc}">${m.chc}</span></td>
+            <td><span class="cat-pill c${m.pop}">${m.pop}</span></td>
+            <td><span class="cat-pill c${m.imp}">${m.imp}</span></td>
+            <td><span class="cat-pill c${m.dmpa}">${m.dmpa}</span></td>
+            <td><span class="cat-pill c${m.lng}">${m.lng}</span></td>
+            <td><span class="cat-pill c${m.cu}">${m.cu}</span></td>
+          </tr>
+        `).join('');
+
+        resultsContent.innerHTML = `
+          <div class="ref-section">
+            <h3 class="section-title">Guideline Matches</h3>
+            <table class="criteria-table">
+              <thead>
+                <tr>
+                  <th>Condition</th>
+                  <th>CHC</th>
+                  <th>POP</th>
+                  <th>IMP</th>
+                  <th>DMPA</th>
+                  <th>LNG</th>
+                  <th>Cu</th>
+                </tr>
+              </thead>
+              <tbody>${tableRows}</tbody>
+            </table>
+          </div>`;
+      }
     }
+    
+    // Smoothly scroll to the results panel
+    resultsPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
 
   resetBtn.addEventListener('click', () => {
@@ -486,8 +489,9 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="results-empty-icon">∅</div>
         <p>Select filters on the left, then press <strong>Show UKMEC criteria</strong> to view the matching rows from UKMEC 2025.</p>
       </div>`;
+      
+    // Smoothly scroll back to the very top of the page
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 });
 </script>
-</body>
-</html>
