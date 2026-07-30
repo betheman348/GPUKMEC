@@ -1,1 +1,790 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Keep this page out of search engines -->
+<meta name="robots" content="noindex, nofollow">
+<title>Clinician Toolkit</title>
+<style>
+  :root{
+    --ink:#16222e;
+    --ink-soft:#4a5a68;
+    --paper:#f5f7f8;
+    --card:#ffffff;
+    --line:#dde4e9;
+    --blue:#005eb8;      /* links / primary action */
+    --blue-dark:#003d78;
+    --red:#b3261e;       /* urgent */
+    --red-bg:#fdf1f0;
+    --amber:#8a6100;     /* verify flags */
+    --amber-bg:#fdf6e3;
+    --green:#0f7b52;     /* copied state */
+    --radius:10px;
+    --mono:ui-monospace,'SF Mono',Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;background:var(--paper);color:var(--ink);
+    font:16px/1.55 ui-sans-serif,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;
+  }
+  a{color:var(--blue)}
+  .wrap{max-width:980px;margin:0 auto;padding:0 18px 90px}
 
+  header.site{
+    background:var(--ink);color:#fff;padding:26px 0 22px;margin-bottom:22px;
+  }
+  header.site .wrap{padding-bottom:0}
+  .eyebrow{
+    font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+    color:#9fb3c4;margin:0 0 6px;font-weight:600;
+  }
+  header.site h1{margin:0;font-size:clamp(24px,4vw,34px);line-height:1.15;font-weight:800;letter-spacing:-.01em}
+  header.site p{margin:10px 0 0;color:#c6d3dd;max-width:62ch;font-size:15px}
+
+  /* search + nav */
+  .controls{position:sticky;top:0;z-index:30;background:var(--paper);padding:12px 0 10px;border-bottom:1px solid var(--line)}
+  .controls .inner{max-width:980px;margin:0 auto;padding:0 18px;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+  #q{
+    flex:1;min-width:220px;padding:10px 14px;font-size:15px;
+    border:1.5px solid var(--line);border-radius:999px;background:#fff;color:var(--ink);
+  }
+  #q:focus{outline:2px solid var(--blue);outline-offset:1px;border-color:var(--blue)}
+  nav.jump{display:flex;gap:6px;flex-wrap:wrap}
+  nav.jump a{
+    font-size:12.5px;font-weight:600;text-decoration:none;color:var(--ink-soft);
+    padding:5px 10px;border:1px solid var(--line);border-radius:999px;background:#fff;white-space:nowrap;
+  }
+  nav.jump a:hover{border-color:var(--blue);color:var(--blue)}
+
+  /* sections */
+  section{margin:34px 0}
+  section h2{
+    font-size:13px;letter-spacing:.13em;text-transform:uppercase;font-weight:800;
+    color:var(--ink-soft);margin:0 0 4px;display:flex;align-items:center;gap:10px;
+  }
+  section h2::after{content:"";flex:1;height:1px;background:var(--line)}
+  section .sub{margin:0 0 14px;color:var(--ink-soft);font-size:14px}
+
+  /* resource rows */
+  .item{
+    background:var(--card);border:1px solid var(--line);border-left:4px solid var(--blue);
+    border-radius:var(--radius);padding:14px 16px;margin:10px 0;
+    display:flex;gap:14px;align-items:flex-start;flex-wrap:wrap;
+  }
+  .item.urgent{border-left-color:var(--red);background:var(--red-bg)}
+  .item .body{flex:1;min-width:240px}
+  .item .name{font-weight:700;font-size:16px;margin:0}
+  .item .desc{margin:3px 0 0;font-size:14px;color:var(--ink-soft)}
+  .item .desc .tel{font-family:var(--mono);font-weight:600;color:var(--ink);white-space:nowrap}
+  .actions{display:flex;gap:8px;align-items:center;padding-top:2px}
+  .btn{
+    font:600 13.5px/1 ui-sans-serif,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;
+    padding:9px 14px;border-radius:8px;cursor:pointer;text-decoration:none;
+    border:1.5px solid var(--blue);display:inline-flex;align-items:center;gap:6px;white-space:nowrap;
+  }
+  .btn.open{background:var(--blue);color:#fff}
+  .btn.open:hover{background:var(--blue-dark);border-color:var(--blue-dark)}
+  .btn.copy{background:#fff;color:var(--blue)}
+  .btn.copy:hover{background:#eef4fb}
+  .btn.copy.done{border-color:var(--green);color:var(--green);background:#f0faf5}
+  .item.urgent .btn.open{background:var(--red);border-color:var(--red)}
+  .item.urgent .btn.copy{color:var(--red);border-color:var(--red)}
+  .item.urgent .btn.copy.done{color:var(--green);border-color:var(--green)}
+
+  .flag{
+    display:inline-block;font-size:11.5px;font-weight:700;letter-spacing:.04em;
+    color:var(--amber);background:var(--amber-bg);border:1px solid #ecd9a0;
+    border-radius:5px;padding:2px 7px;margin-left:6px;vertical-align:2px;
+  }
+
+  /* tables (HRT) */
+  .tablecard{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px 16px 8px;margin:12px 0;overflow-x:auto}
+  .tablecard h3{margin:0 0 4px;font-size:16px}
+  .tablecard .src{font-size:12.5px;color:var(--ink-soft);margin:0 0 10px}
+  table{border-collapse:collapse;width:100%;font-size:14px;min-width:620px}
+  th,td{border:1px solid var(--line);padding:7px 10px;text-align:left;vertical-align:top}
+  thead th{background:#eef2f5;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em}
+  tbody th{background:#f7f9fa;font-weight:700;white-space:nowrap}
+  td .off{color:var(--amber);font-weight:700}
+  .fn{font-size:12.5px;color:var(--ink-soft);margin:10px 0 8px}
+
+  /* triglyceride pathway */
+  .path{display:grid;gap:10px;margin:12px 0}
+  .pathstep{
+    background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    padding:13px 16px;border-left:5px solid var(--line);
+  }
+  .pathstep .band{font-family:var(--mono);font-weight:700;font-size:14px}
+  .pathstep p{margin:5px 0 0;font-size:14px;color:var(--ink-soft)}
+  .p-urgent{border-left-color:#b3261e}.p-urgent .band{color:#b3261e}
+  .p-high{border-left-color:#c2410c}.p-high .band{color:#c2410c}
+  .p-mod{border-left-color:#8a6100}.p-mod .band{color:#8a6100}
+  .p-start{border-left-color:var(--blue)}.p-start .band{color:var(--blue)}
+  .note{
+    background:var(--amber-bg);border:1px solid #ecd9a0;border-radius:8px;
+    padding:10px 14px;font-size:13.5px;color:#5c470c;margin:12px 0;
+  }
+  .hidden{display:none !important}
+  footer{margin-top:50px;font-size:12.5px;color:var(--ink-soft);border-top:1px solid var(--line);padding-top:14px}
+  @media (max-width:560px){
+    .actions{width:100%;justify-content:flex-end}
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap">
+    <p class="eyebrow">Internal reference &middot; Not patient-facing advice</p>
+    <h1>Clinician Toolkit</h1>
+    <p>Quick links, referral routes and phone numbers used day-to-day, plus HRT and triglyceride quick references. Open a resource directly, or copy a ready-to-paste line to drop into notes, tasks or a patient message.</p>
+  </div>
+</header>
+
+<div class="controls">
+  <div class="inner">
+    <input id="q" type="search" placeholder="Filter resources… (e.g. physio, safeguarding, HRT)" aria-label="Filter resources">
+    <nav class="jump">
+      <a href="#urgent">Urgent</a>
+      <a href="#prescribing">Prescribing</a>
+      <a href="#guides">Guides</a>
+      <a href="#referrals">Referrals</a>
+      <a href="#mh">Mental health</a>
+      <a href="#ltc">Diabetes &amp; resp</a>
+      <a href="#cancer">Cancer</a>
+      <a href="#women">Women's health</a>
+      <a href="#ai">AI tools</a>
+      <a href="#hrt">HRT</a>
+      <a href="#lipids">Triglycerides</a>
+    </nav>
+  </div>
+</div>
+
+<main class="wrap">
+
+<!-- ===================== URGENT & SAFEGUARDING ===================== -->
+<section id="urgent">
+  <h2>Urgent &amp; safeguarding</h2>
+  <p class="sub">Immediate risk to life or serious harm: always 999. Police non-emergency: 101.</p>
+
+  <div class="item urgent" data-tags="emergency 999 immediate risk life">
+    <div class="body">
+      <p class="name">Emergency — immediate risk to life or serious harm</p>
+      <p class="desc">Call <span class="tel">999</span>. Police non-emergency: <span class="tel">101</span>.</p>
+    </div>
+    <div class="actions">
+      <a class="btn open" href="tel:999">Call 999</a>
+      <button class="btn copy" data-copy="Emergency (immediate risk to life or serious harm): 999. Police non-emergency: 101.">Copy</button>
+    </div>
+  </div>
+
+  <div class="item urgent" data-tags="adult safeguarding hampshire social services referral abuse neglect">
+    <div class="body">
+      <p class="name">Hampshire Adult Services — safeguarding &amp; adult social care</p>
+      <p class="desc">In hours <span class="tel">0300 555 1386</span> (Mon 8:30–17:00, Tue–Thu 9:30–17:00, Fri 8:30–16:30 — expect long waits). Out of hours <span class="tel">0300 555 1373</span>. Professionals' referral route and guidance on the safeguarding page.</p>
+    </div>
+    <div class="actions">
+      <a class="btn open" href="https://www.hants.gov.uk/socialcareandhealth/adultsocialcare/safeguarding" target="_blank" rel="noopener">Open</a>
+      <button class="btn copy" data-copy="Hampshire Adult Services (safeguarding/adult social care): in hours 0300 555 1386, out of hours 0300 555 1373. https://www.hants.gov.uk/socialcareandhealth/adultsocialcare/safeguarding">Copy</button>
+    </div>
+  </div>
+
+  <div class="item urgent" data-tags="children safeguarding iarf inter agency referral form child protection">
+    <div class="body">
+      <p class="name">Children — Inter-Agency Referral Form (IARF), Hampshire</p>
+      <p class="desc">Level 3/4 need or immediate safeguarding concerns → complete the IARF online. Children's Services <span class="tel">0300 555 1384</span> (in hours), <span class="tel">0300 555 1371</span> (out of hours).</p>
+    </div>
+    <div class="actions">
+      <a class="btn open" href="https://childrenandfamiliesportal.hants.gov.uk/s4s/FormDetails/FillForm?formId=279" target="_blank" rel="noopener">Open form</a>
+      <button class="btn copy" data-copy="Hampshire Inter-Agency Referral Form (child safeguarding, Level 3/4): https://childrenandfamiliesportal.hants.gov.uk/s4s/FormDetails/FillForm?formId=279 — Children's Services 0300 555 1384 (OOH 0300 555 1371)">Copy</button>
+    </div>
+  </div>
+
+  <div class="item" data-tags="children early help family level 2 referral eastleigh winchester">
+    <div class="body">
+      <p class="name">Family Help / early help — referral pathway &amp; Level 2 forms</p>
+      <p class="desc">Thresholds, intervention pathway and district Level 2 request-for-support forms (including Eastleigh &amp; Winchester).</p>
+    </div>
+    <div class="actions">
+      <a class="btn open" href="https://www.hants.gov.uk/socialcareandhealth/childrenandfamilies/early-help/professionals/referral" target="_blank" rel="noopener">Open</a>
+      <button class="btn copy" data-copy="Hampshire Family Help referral process (thresholds + Level 2 forms + IARF): https://www.hants.gov.uk/socialcareandhealth/childrenandfamilies/early-help/professionals/referral">Copy</button>
+    </div>
+  </div>
+
+  <div class="item urgent" data-tags="domestic abuse helpline national refuge 24/7">
+    <div class="body">
+      <p class="name">National Domestic Abuse Helpline</p>
+      <p class="desc">24/7 freephone <span class="tel">0808 2000 247</span>. Free, confidential, run by Refuge.</p>
+    </div>
+    <div class="actions">
+      <a class="btn open" href="tel:08082000247">Call</a>
+      <button class="btn copy" data-copy="National Domestic Abuse Helpline (24/7, free and confidential): 0808 2000 247 — https://www.nationaldahelpline.org.uk">Copy</button>
+    </div>
+  </div>
+
+  <div class="item" data-tags="hourglass elder abuse older people helpline">
+    <div class="body">
+      <p class="name">Hourglass — older victims of abuse</p>
+      <p class="desc">Helpline <span class="tel">0808 808 8141</span> for older people experiencing (or at risk of) harm, abuse or exploitation.</p>
+    </div>
+    <div class="actions">
+      <a class="btn open" href="tel:08088088141">Call</a>
+      <button class="btn copy" data-copy="Hourglass helpline (abuse of older people): 0808 808 8141 — https://wearehourglass.org">Copy</button>
+    </div>
+  </div>
+
+  <div class="item" data-tags="modern slavery helpline trafficking exploitation">
+    <div class="body">
+      <p class="name">Modern Slavery Helpline</p>
+      <p class="desc">24/7 <span class="tel">0800 0121 700</span>.</p>
+    </div>
+    <div class="actions">
+      <a class="btn open" href="tel:08000121700">Call</a>
+      <button class="btn copy" data-copy="Modern Slavery Helpline (24/7): 0800 0121 700 — https://www.modernslaveryhelpline.org">Copy</button>
+    </div>
+  </div>
+
+  <div class="item" data-tags="prevent counter terrorism radicalisation police">
+    <div class="body">
+      <p class="name">Prevent (counter-terrorism / radicalisation concerns)</p>
+      <p class="desc">Non-urgent: call <span class="tel">101</span> and ask for the Hampshire police Prevent team, or refer via ACT. Emergency: <span class="tel">999</span>.</p>
+    </div>
+    <div class="actions">
+      <a class="btn open" href="https://actearly.uk" target="_blank" rel="noopener">Open ACT</a>
+      <button class="btn copy" data-copy="Prevent (radicalisation concerns): call 101 and ask for the Hampshire police Prevent team (999 in an emergency), or refer via https://actearly.uk">Copy</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PRESCRIBING ===================== -->
+<section id="prescribing">
+  <h2>Prescribing &amp; formulary</h2>
+
+  <div class="item" data-tags="hiow formulary medicines traffic light approved restricted prescribing hampshire">
+    <div class="body">
+      <p class="name">HIOW Joint Medicines Formulary</p>
+      <p class="desc">What's actually stocked, approved or restricted locally — traffic-light status across primary care, hospital, community and mental health providers.</p>
+    </div>
+    <div class="actions">
+      <a class="btn open" href="https://www.hiowformulary.nhs.uk/default.asp?siteType=Full" target="_blank" rel="noopener">Open</a>
+      <button class="btn copy" data-copy="Hampshire & Isle of Wight Joint Medicines Formulary: https://www.hiowformulary.nhs.uk/default.asp?siteType=Full">Copy</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== GUIDES ===================== -->
+<section id="guides">
+  <h2>Guides &amp; handbooks</h2>
+
+  <div class="item" data-tags="cesel guides general medical clinical effectiveness south east london">
+    <div class="body">
+      <p class="name">CESEL guides</p>
+      <p class="desc">Clinical Effectiveness South East London — concise, practical primary-care guides across most general medical topics.</p>
+    </div>
+    <div class="actions">
+      <a class="btn open" href="https://www.selondonics.org/icb/healthcare-professionals/cesel/guides/" target="_blank" rel="noopener">Open</a>
+      <button class="btn copy" data-copy="CESEL guides (Clinical Effectiveness South East London — primary care guides): https://www.selondonics.org/icb/healthcare-professionals/cesel/guides/">Copy</button>
+    </div>
+  </div>
+
+  <div class="item" data-tags="green book palliative care handbook ruh symptom control end of life">
+    <div class="body">
+      <p class="name">The Green Book — Palliative Care Handbook (RUH)</p>
+      <p class="desc">Symptom control doses, syringe drivers and end-of-life prescribing in one PDF.</p>
+    </div>
+    <div class="actions">
+      <a class="btn open" href="https://www.ruh.nhs.uk/for_clinicians/departments_ruh/palliative_care/documents/palliative_care_handbook.pdf" target="_blank" rel="noopener">Open PDF</a>
+      <button class="btn copy" data-copy="Palliative Care Handbook ('Green Book', RUH): https://www.ruh.nhs.uk/for_clinicians/departments_ruh/palliative_care/documents/palliative_care_handbook.pdf">Copy</button>
+    </div>
+  </div>
+
+  <div class="item" data-tags="death certification coroner referral wessex lmc medical examiner mccd">
+    <div class="body">
+      <p class="name">Death certification &amp; coroner referral — Wessex LMCs</p>
+      <p class="desc">Current process (medical examiner system, MCCD, when coroner notification is required) with decision-making flowchart.</p>
+    </div>
+    <div class="actions">
+      <a class="btn open" href="https://www.wessexlmcs.com/guidance/death-certification-from-9th-sep/" target="_blank" rel="noopener">Open</a>
+      <button class="btn copy" data-copy="Wessex LMCs death certification & coroner referral guidance: https://www.wessexlmcs.com/guidance/death-certification-from-9th-sep/">Copy</button>
+    </div>
+  </div>
+
+  <div class="item" data-tags="asthma gina guidelines respiratory">
+    <div class="body">
+      <p class="name">GINA — Global Initiative for Asthma</p>
+      <p class="desc">Current GINA strategy report and pocket guides for asthma diagnosis and stepwise management.</p>
+    </div>
+    <div class="actions">
+      <a class="btn open" href="https://ginasthma.org" target="_blank" rel="noopener">Open</a>
+      <button class="btn copy" data-copy="GINA asthma guidelines: https://ginasthma.org">Copy</button>
+    </div>
+  </div>
+
+  <div class="item" data-tags="dermatology pcds primary care dermatological society skin rash">
+    <div class="body">
+      <p class="name">PCDS — Primary Care Dermatology Society</p>
+      <p class="desc">A–Z of skin conditions with photos and primary-care management guidance.</p>
+    </div>
+    <div class="actions">
+      <a class="btn open" href="https://www.pcds.org.uk" target="_blank" rel="noopener">Open</a>
+      <button class="btn copy" data-copy="Primary Care Dermatology Society (A–Z of skin conditions): https://www.pcds.org.uk">Copy</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== REFERRALS & LOCAL SERVICES ===================== -->
+<section id="referrals">
+  <h2>Referrals &amp; local services</h2>
+
+  <div class="item" data-tags="physiotherapy msk self referral hiow physio musculoskeletal">
+    <div class="body">
+      <p class="name">MSK physiotherapy — self-referral (HIOW Healthcare)</p>
+      <p class="desc">Patient self-referral (or GP referral) into community MSK physio; area-specific forms under the referrals page. Red-flag exclusions listed on the form.</p>
+    </div>
+    <div class="actions">
+      <a class="btn open" href="https://hiowhealthcare.nhs.uk/msk/referrals" target="_blank" rel="noopener">Open</a>
+      <button class="btn copy" data-copy="MSK physiotherapy self-referral (Hampshire & IOW Healthcare): https://hiowhealthcare.nhs.uk/msk/referrals">Copy</button>
+    </div>
+  </div>
+
+  <div class="item" data-tags="cfs me fatigue south coast referral chronic fatigue">
+    <div class="body">
+      <p class="name">South Coast Fatigue — ME/CFS service</p>
+      <p class="desc">NHS-commissioned service for mild–moderate ME/CFS, age 16+, Hampshire &amp; IOW. GP or consultant referral only; diagnosis must be made (and screening bloods done) before referral.</p>
+    </div>
+    <div class="actions">
+      <a class="btn open" href="https://southcoastfatigue.co.uk" target="_blank" rel="noopener">Open</a>
+      <button class="btn copy" data-copy="South Coast Fatigue (NHS ME/CFS service for Hampshire & IOW, mild–moderate, 16+, GP/consultant referral after diagnosis): https://southcoastfatigue.co.uk">Copy</button>
+    </div>
+  </div>
+
+  <div class="item" data-tags="home oxygen vivisol hoof respiratory">
+    <div class="body">
+      <p class="name">Home oxygen — Vivisol</p>
+      <p class="desc">Regional home oxygen provider. Order via HOOF Part A for non-specialist/temporary supply. Oxygen enquiries <span class="tel">0800 833 531</span>; patient line <span class="tel">0800 917 9840</span>.</p>
+    </div>
+    <div class="actions">
+      <a class="btn open" href="https://www.vivisol.co.uk/services/healthcare-professionals/" target="_blank" rel="noopener">Open</a>
+      <button class="btn copy" data-copy="Vivisol home oxygen (HOOF ordering; enquiries 0800 833 531, patient support 0800 917 9840): https://www.vivisol.co.uk/services/healthcare-professionals/">Copy</button>
+    </div>
+  </div>
+
+  <div class="item" data-tags="frailty team referral community">
+    <div class="body">
+      <p class="name">Frailty team referrals <span class="flag">verify number</span></p>
+      <p class="desc">Number supplied as <span class="tel">0400 121 2594</span> — this isn't a valid UK dialling code (04 range doesn't exist), so it's likely a typo (0300…?). Confirm from the practice directory and correct here.</p>
+    </div>
+    <div class="actions">
+      <button class="btn copy" data-copy="Frailty team referrals: [NUMBER TO CONFIRM — 0400 121 2594 as written is not a valid UK number]">Copy</button>
+    </div>
+  </div>
+
+  <div class="item" data-tags="steady strong balance falls prevention classes mobility walking support hampshire">
+    <div class="body">
+      <p class="name">Steady and Strong — strength &amp; balance classes</p>
+      <p class="desc">Hampshire CC falls-prevention exercise classes (Otago-based); 100+ venues plus online. No referral needed, but a fall in the last 3 months → consider the NHS falls pathway first.</p>
+    </div>
+    <div class="actions">
+      <a class="btn open" href="https://www.hants.gov.uk/socialcareandhealth/adultsocialcare/balanceclasses" target="_blank" rel="noopener">Open</a>
+      <button class="btn copy" data-copy="Steady and Strong balance classes (Hampshire falls prevention, no referral needed): https://www.hants.gov.uk/socialcareandhealth/adultsocialcare/balanceclasses">Copy</button>
+    </div>
+  </div>
+
+  <div class="item" data-tags="health walks walktogether eastleigh wellbeing walking group exercise">
+    <div class="body">
+      <p class="name">WalkTogether — borough health walks (formerly Health Walks)</p>
+      <p class="desc">Free volunteer-led weekly walks, ~1 hour / 2–3 miles with slower options; suitable for long-term conditions and mobility issues. Just turn up.</p>
+    </div>
+    <div class="actions">
+      <a class="btn open" href="https://www.eastleigh.gov.uk/sport-and-health/supporting-health/health-walks" target="_blank" rel="noopener">Open</a>
+      <button class="btn copy" data-copy="WalkTogether free weekly health walks (all abilities, just turn up): https://www.eastleigh.gov.uk/sport-and-health/supporting-health/health-walks">Copy</button>
+    </div>
+  </div>
+
+  <div class="item" data-tags="wellbeing walks southampton my journey walking">
+    <div class="body">
+      <p class="name">Southampton wellbeing walks — My Journey</p>
+      <p class="desc">Free led walks across the city (Common, Weston Shore and more), graded by pace; new walkers register on arrival.</p>
+    </div>
+    <div class="actions">
+      <a class="btn open" href="https://myjourneysouthampton.com/walk/southampton-walking-opportunities/" target="_blank" rel="noopener">Open</a>
+      <button class="btn copy" data-copy="Southampton wellbeing walks (free led walks, all levels): https://myjourneysouthampton.com/walk/southampton-walking-opportunities/">Copy</button>
+    </div>
+  </div>
+
+  <div class="item" data-tags="smoking cessation smokefree hampshire quit nrt vape stop">
+    <div class="body">
+      <p class="name">Smokefree Hampshire — stop smoking service</p>
+      <p class="desc">Free 12-week 1:1 support with NRT or vape allowance; self-referral or professional referral. Covers Hampshire (excludes Southampton and Portsmouth city residents).</p>
+    </div>
+    <div class="actions">
+      <a class="btn open" href="https://smokefreehampshire.co.uk" target="_blank" rel="noopener">Open</a>
+      <button class="btn copy" data-copy="Smokefree Hampshire — free stop smoking support (12 weeks 1:1 + NRT/vape; self-refer online): https://smokefreehampshire.co.uk (professional referrals: https://www.smokefreehampshire.co.uk/make-a-referral/)">Copy</button>
+    </div>
+  </div>
+
+  <div class="item" data-tags="drugs alcohol recovery inclusion addiction detox nhs confidential">
+    <div class="body">
+      <p class="name">Inclusion Recovery Hampshire — drug &amp; alcohol service</p>
+      <p class="desc">Free, confidential NHS recovery service (25+; under-25s via Hampshire 24/7 on the same number). Self-referral or GP referral. <span class="tel">0300 124 0103</span>. Local hub: 41 High Street, SO50 5LG.</p>
+    </div>
+    <div class="actions">
+      <a class="btn open" href="https://www.inclusionhants.org" target="_blank" rel="noopener">Open</a>
+      <button class="btn copy" data-copy="Inclusion Recovery Hampshire — free, confidential NHS drug & alcohol recovery service. Tel 0300 124 0103. Local hub: 41 High Street, Eastleigh SO50 5LG. Self-referral online: https://www.inclusionhants.org">Copy</button>
+    </div>
+  </div>
+
+  <div class="item" data-tags="adult social care county council hampshire support">
+    <div class="body">
+      <p class="name">Adult social care — Hampshire County Council</p>
+      <p class="desc">Care needs assessments, care at home, Connect to Support directory and contact routes.</p>
+    </div>
+    <div class="actions">
+      <a class="btn open" href="https://www.hants.gov.uk/socialcareandhealth/adultsocialcare" target="_blank" rel="noopener">Open</a>
+      <button class="btn copy" data-copy="Hampshire County Council adult social care: https://www.hants.gov.uk/socialcareandhealth/adultsocialcare">Copy</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== MENTAL HEALTH ===================== -->
+<section id="mh">
+  <h2>Mental health</h2>
+
+  <div class="item" data-tags="italk cbt talking therapies anxiety depression self referral nhs">
+    <div class="body">
+      <p class="name">italk — NHS Talking Therapies (CBT)</p>
+      <p class="desc">Self-referral for adults in Hampshire with anxiety, low mood, stress; CBT and guided self-help.</p>
+    </div>
+    <div class="actions">
+      <a class="btn open" href="https://www.italk.org.uk" target="_blank" rel="noopener">Open</a>
+      <button class="btn copy" data-copy="italk — free NHS talking therapies for anxiety and low mood (self-referral online): https://www.italk.org.uk">Copy</button>
+    </div>
+  </div>
+
+  <div class="item" data-tags="eycs youth counselling children young people 11-19 free">
+    <div class="body">
+      <p class="name">EYCS — youth counselling service</p>
+      <p class="desc">Free, confidential 1:1 counselling for 11–19s in the borough and southern parishes (venues include local GP surgeries and community centres); 6 sessions. Referral form on their site.</p>
+    </div>
+    <div class="actions">
+      <a class="btn open" href="https://www.eycs.co.uk" target="_blank" rel="noopener">Open</a>
+      <button class="btn copy" data-copy="EYCS — free confidential counselling for 11–19 year olds (6 sessions, self/parent/professional referral): https://www.eycs.co.uk">Copy</button>
+    </div>
+  </div>
+
+  <div class="item" data-tags="no limits children young people counselling support southampton hampshire">
+    <div class="body">
+      <p class="name">No Limits — children &amp; young people's support</p>
+      <p class="desc">Free counselling, advice and drop-in support for under-26s across Southampton and Hampshire.</p>
+    </div>
+    <div class="actions">
+      <a class="btn open" href="https://nolimitshelp.org.uk" target="_blank" rel="noopener">Open</a>
+      <button class="btn copy" data-copy="No Limits — free support and counselling for children and young people (under 26): https://nolimitshelp.org.uk">Copy</button>
+    </div>
+  </div>
+
+  <div class="item" data-tags="adhd autism questionnaire forms email asrs snap">
+    <div class="body">
+      <p class="name">ADHD &amp; autism questionnaires <span class="flag">internal</span></p>
+      <p class="desc">Currently held on practice email. If wanted, the standard freely-licensed instruments (e.g. ASRS, AQ-10, SNAP-IV) could be linked here directly instead — say the word.</p>
+    </div>
+    <div class="actions">
+      <button class="btn copy" data-copy="ADHD & autism screening questionnaires: on practice email (templates: ASRS / AQ-10 / SNAP-IV)">Copy</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== DIABETES & RESPIRATORY ===================== -->
+<section id="ltc">
+  <h2>Diabetes &amp; respiratory</h2>
+
+  <div class="item" data-tags="eden diabetes resources education">
+    <div class="body">
+      <p class="name">EDEN diabetes — clinician resources</p>
+      <p class="desc">Practical diabetes education resources for primary care (Leicester Diabetes Centre).</p>
+    </div>
+    <div class="actions">
+      <a class="btn open" href="https://www.edendiabetes.com/resources" target="_blank" rel="noopener">Open</a>
+      <button class="btn copy" data-copy="EDEN diabetes resources for primary care: https://www.edendiabetes.com/resources">Copy</button>
+    </div>
+  </div>
+
+  <div class="item" data-tags="pitstop diabetes education primary care course">
+    <div class="body">
+      <p class="name">PITstop diabetes <span class="flag">verify URL</span></p>
+      <p class="desc">Primary-care diabetes training and resources.</p>
+    </div>
+    <div class="actions">
+      <a class="btn open" href="https://www.pitstopdiabetes.co.uk" target="_blank" rel="noopener">Open</a>
+      <button class="btn copy" data-copy="PITstop diabetes (primary care diabetes education): https://www.pitstopdiabetes.co.uk">Copy</button>
+    </div>
+  </div>
+
+  <div class="item" data-tags="diabetes uk patient support charity">
+    <div class="body">
+      <p class="name">Diabetes UK</p>
+      <p class="desc">Patient information, Learning Zone and helpline for people living with diabetes.</p>
+    </div>
+    <div class="actions">
+      <a class="btn open" href="https://www.diabetes.org.uk" target="_blank" rel="noopener">Open</a>
+      <button class="btn copy" data-copy="Diabetes UK — information and support for people with diabetes: https://www.diabetes.org.uk">Copy</button>
+    </div>
+  </div>
+
+  <div class="item" data-tags="asthma lung uk copd respiratory support patient">
+    <div class="body">
+      <p class="name">Asthma + Lung UK</p>
+      <p class="desc">Patient support for asthma, COPD and lung cancer — helpline, inhaler technique videos, condition information.</p>
+    </div>
+    <div class="actions">
+      <a class="btn open" href="https://www.asthmaandlung.org.uk" target="_blank" rel="noopener">Open</a>
+      <button class="btn copy" data-copy="Asthma + Lung UK — support and information for lung conditions: https://www.asthmaandlung.org.uk">Copy</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CANCER ===================== -->
+<section id="cancer">
+  <h2>Cancer support</h2>
+
+  <div class="item" data-tags="macmillan cancer support helpline benefits">
+    <div class="body">
+      <p class="name">Macmillan Cancer Support</p>
+      <p class="desc">Support line <span class="tel">0808 808 00 00</span> (7 days) — emotional, practical and financial support for anyone affected by cancer.</p>
+    </div>
+    <div class="actions">
+      <a class="btn open" href="https://www.macmillan.org.uk" target="_blank" rel="noopener">Open</a>
+      <button class="btn copy" data-copy="Macmillan Cancer Support — free support line 0808 808 00 00 (7 days a week): https://www.macmillan.org.uk">Copy</button>
+    </div>
+  </div>
+
+  <div class="item" data-tags="maggies cancer centres support drop in">
+    <div class="body">
+      <p class="name">Maggie's</p>
+      <p class="desc">Free drop-in cancer support centres (nearest: Southampton, at the general hospital) — no referral or appointment needed.</p>
+    </div>
+    <div class="actions">
+      <a class="btn open" href="https://www.maggies.org" target="_blank" rel="noopener">Open</a>
+      <button class="btn copy" data-copy="Maggie's — free cancer support centres, no referral needed (drop in): https://www.maggies.org">Copy</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== WOMEN'S HEALTH ===================== -->
+<section id="women">
+  <h2>Women's &amp; sexual health</h2>
+
+  <div class="item" data-tags="epau early pregnancy assessment unit winchester bleeding pain ectopic">
+    <div class="body">
+      <p class="name">EPAU — Winchester <span class="flag">confirm criteria</span></p>
+      <p class="desc"><span class="tel">01962 824484</span>. Typical indications (confirm local criteria): confirmed early pregnancy (positive test, roughly &lt;16 weeks) with pain and/or bleeding; suspected ectopic — discuss same day (haemodynamically unstable → 999/ED); recurrent miscarriage follow-up or hyperemesis per local pathway.</p>
+    </div>
+    <div class="actions">
+      <a class="btn open" href="tel:01962824484">Call</a>
+      <button class="btn copy" data-copy="EPAU Winchester: 01962 824484 — early pregnancy (positive test) with pain/bleeding; suspected ectopic discuss same day (unstable → 999/ED)">Copy</button>
+    </div>
+  </div>
+
+  <div class="item" data-tags="abortion bpas termination pregnancy choices">
+    <div class="body">
+      <p class="name">BPAS — abortion care</p>
+      <p class="desc">Self-referral for NHS-funded abortion care and pregnancy counselling. Booking line <span class="tel">03457 30 40 30</span>.</p>
+    </div>
+    <div class="actions">
+      <a class="btn open" href="https://www.bpas.org" target="_blank" rel="noopener">Open</a>
+      <button class="btn copy" data-copy="BPAS — abortion care and pregnancy counselling (self-referral, NHS funded): https://www.bpas.org — booking 03457 30 40 30">Copy</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== AI TOOLS ===================== -->
+<section id="ai">
+  <h2>AI tools</h2>
+  <p class="sub">Decision support only — verify against the cited source, and never enter patient-identifiable data outside approved, information-governance-cleared tools.</p>
+
+  <div class="item" data-tags="medwise ai clinical search guidelines nice cks">
+    <div class="body">
+      <p class="name">Medwise AI</p>
+      <p class="desc">Clinical question-answering search built for healthcare professionals: retrieves bite-sized answers from trusted sources (NICE, CKS, SIGN and integrated local guidelines) with the source shown, rather than free-generating text. Free tier for UK clinicians.</p>
+    </div>
+    <div class="actions">
+      <a class="btn open" href="https://www.medwise.ai" target="_blank" rel="noopener">Open</a>
+      <button class="btn copy" data-copy="Medwise AI — clinical question answering from trusted guideline sources: https://www.medwise.ai">Copy</button>
+    </div>
+  </div>
+
+  <div class="item" data-tags="microsoft copilot llm assistant admin drafting">
+    <div class="body">
+      <p class="name">Microsoft Copilot</p>
+      <p class="desc">General-purpose LLM assistant — useful for drafting letters, summarising documents and admin. Not a clinical knowledge source; only use an NHS-tenanted/enterprise version for anything touching patient data.</p>
+    </div>
+    <div class="actions">
+      <a class="btn open" href="https://copilot.microsoft.com" target="_blank" rel="noopener">Open</a>
+      <button class="btn copy" data-copy="Microsoft Copilot (general AI assistant for drafting/admin — no patient-identifiable data outside an approved NHS tenant): https://copilot.microsoft.com">Copy</button>
+    </div>
+  </div>
+
+  <div class="item" data-tags="heidi scribe ai transcription consultation notes">
+    <div class="body">
+      <p class="name">Heidi Health</p>
+      <p class="desc">AI medical scribe — transcribes the consultation and drafts structured notes/letters for your review. Requires practice sign-off (DPIA/IG, patient consent process) before clinical use.</p>
+    </div>
+    <div class="actions">
+      <a class="btn open" href="https://www.heidihealth.com" target="_blank" rel="noopener">Open</a>
+      <button class="btn copy" data-copy="Heidi Health — AI scribe for consultation notes (requires practice IG/DPIA approval and patient consent): https://www.heidihealth.com">Copy</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== HRT ===================== -->
+<section id="hrt">
+  <h2>HRT quick reference</h2>
+  <p class="sub">Working summary and dose-equivalence data drawn from NICE NG23 (2024), BMS <em>Tools for Clinicians</em> and the BNF. Prescribing decisions and dose checks remain with the clinician — check the BNF for doses, interactions and licensing before prescribing.</p>
+
+  <div class="item" data-tags="hrt which regimen sequential continuous choosing">
+    <div class="body">
+      <p class="name">Choosing the regimen — 3 questions</p>
+      <p class="desc"><strong>1. Uterus?</strong> No → oestrogen-only (unless sub-total hysterectomy, or hysterectomy for moderate/severe endometriosis → combined). Yes → progestogen is mandatory.&nbsp;
+      <strong>2. Contraception still needed?</strong> (&lt;55y, sexually active, menstruating; not needed if amenorrhoeic ≥2y when ≤50, or ≥1y when &gt;50) → options include oestrogen + 52&nbsp;mg IUS, CHC if eligible, or sequential HRT + progestogen-only contraception. Stop hormonal contraception at 55.&nbsp;
+      <strong>3. Amenorrhoeic &gt;1y?</strong> Yes → continuous combined. No → sequential combined; switch to continuous within 5y of starting or by age 54.</p>
+    </div>
+    <div class="actions">
+      <button class="btn copy" data-copy="HRT regimen logic: (1) No uterus → oestrogen-only (combined if sub-total hysterectomy or hysterectomy for endometriosis). (2) Needs contraception → oestrogen + 52mg IUS / CHC if eligible / sequential HRT + POC; stop contraception at 55. (3) Amenorrhoeic >1y → continuous combined; otherwise sequential, switching to continuous within 5y or by 54.">Copy</button>
+    </div>
+  </div>
+
+  <div class="tablecard" data-tags="hrt estrogen oestrogen dose ultra low standard moderate high oestrogel sandrena lenzetto patch">
+    <h3>Oestrogen dose bands by preparation</h3>
+    <p class="src">Re-set from BMS <em>Tools for Clinicians</em> dose-equivalence data. <span class="off">*</span>&nbsp;= off-licence (higher doses rarely needed for symptom control).</p>
+    <table>
+      <thead><tr><th>Preparation</th><th>Ultra-low</th><th>Low</th><th>Standard</th><th>Moderate</th><th>High</th></tr></thead>
+      <tbody>
+        <tr><th>Oestrogel (pump)</th><td>½ pump</td><td>1 pump</td><td>2 pumps</td><td>3 pumps</td><td>4 pumps</td></tr>
+        <tr><th>Sandrena (gel)</th><td>0.25 mg</td><td>0.5 mg</td><td>1 mg</td><td>1.5–2 mg</td><td>3 mg<span class="off">*</span></td></tr>
+        <tr><th>Lenzetto (spray)</th><td>1 spray</td><td>2 sprays</td><td>3 sprays</td><td>4–5 sprays<span class="off">*</span></td><td>6 sprays<span class="off">*</span></td></tr>
+        <tr><th>Patch</th><td>12.5 µg</td><td>25 µg</td><td>50 µg</td><td>75 µg</td><td>100 µg</td></tr>
+        <tr><th>Oral estradiol</th><td>0.5 mg</td><td>1 mg</td><td>2 mg</td><td>3 mg<span class="off">*</span></td><td>4 mg<span class="off">*</span></td></tr>
+      </tbody>
+    </table>
+    <p class="fn">Start low, uptitrate to symptom control. Prefer transdermal if &gt;60y, raised BMI, migraine, or VTE/CVA risk factors.</p>
+  </div>
+
+  <div class="tablecard" data-tags="hrt progestogen dose endometrial protection utrogestan micronised progesterone mpa norethisterone mirena ius">
+    <h3>Progestogen dose per oestrogen dose band (endometrial protection)</h3>
+    <p class="src">Re-set from BMS <em>Tools for Clinicians: Progestogens and endometrial protection</em>. Cont = continuous (daily); Seq = sequential (12–14 d/cycle).</p>
+    <table>
+      <thead>
+        <tr><th rowspan="2">Oestrogen dose</th><th colspan="2">Micronised progesterone</th><th colspan="2">Medroxyprogesterone acetate</th><th colspan="2">Norethisterone</th><th rowspan="2">52 mg LNG-IUS</th></tr>
+        <tr><th>Cont</th><th>Seq</th><th>Cont</th><th>Seq</th><th>Cont</th><th>Seq</th></tr>
+      </thead>
+      <tbody>
+        <tr><th>Ultra-low / Low</th><td>100 mg</td><td>200 mg</td><td>2.5 mg</td><td>10 mg</td><td>5 mg<span class="off">†</span></td><td>5 mg<span class="off">†</span></td><td rowspan="4">One device covers up to 5 years' use</td></tr>
+        <tr><th>Standard</th><td>100 mg</td><td>200 mg</td><td>2.5–5 mg</td><td>10 mg</td><td>5 mg<span class="off">†</span></td><td>5 mg<span class="off">†</span></td></tr>
+        <tr><th>Moderate</th><td>100 mg</td><td>200 mg</td><td>5 mg</td><td>10 mg</td><td>5 mg</td><td>5 mg</td></tr>
+        <tr><th>High</th><td>200 mg</td><td>300 mg</td><td>10 mg<span class="off">^</span></td><td>20 mg<span class="off">^</span></td><td>5 mg</td><td>5 mg</td></tr>
+      </tbody>
+    </table>
+    <p class="fn"><span class="off">†</span> 1 mg norethisterone protects the endometrium for ultra-low to standard dose oestrogen, but the lowest stand-alone dose available in the UK is 5 mg (off-licence use of three-a-day Noriday POP ≈ 1.05 mg can be considered if 5 mg is not tolerated). <span class="off">^</span> Limited evidence on optimal MPA dosing with high-dose oestrogen; advised dose based on studies reporting 10 mg continuous providing protection with up-to-moderate dose oestrogen.</p>
+  </div>
+
+  <div class="item" data-tags="hrt nice ng23 menopause guideline">
+    <div class="body">
+      <p class="name">NICE NG23 — Menopause (2024)</p>
+      <p class="desc">Diagnosis, treatment and review; the underlying national guideline.</p>
+    </div>
+    <div class="actions">
+      <a class="btn open" href="https://www.nice.org.uk/guidance/ng23" target="_blank" rel="noopener">Open</a>
+      <button class="btn copy" data-copy="NICE NG23 Menopause guideline: https://www.nice.org.uk/guidance/ng23">Copy</button>
+    </div>
+  </div>
+
+  <div class="item" data-tags="bms tools clinicians hrt preparations progestogens equivalents">
+    <div class="body">
+      <p class="name">BMS Tools for Clinicians</p>
+      <p class="desc">Free British Menopause Society tools: HRT preparations &amp; equivalent alternatives, progestogens &amp; endometrial protection, unscheduled bleeding on HRT — the source documents behind the tables above.</p>
+    </div>
+    <div class="actions">
+      <a class="btn open" href="https://thebms.org.uk/publications/tools-for-clinicians/" target="_blank" rel="noopener">Open</a>
+      <button class="btn copy" data-copy="British Menopause Society Tools for Clinicians (HRT preparations, progestogens & endometrial protection, unscheduled bleeding): https://thebms.org.uk/publications/tools-for-clinicians/">Copy</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== TRIGLYCERIDES ===================== -->
+<section id="lipids">
+  <h2>High triglycerides — local pathway</h2>
+  <p class="sub">Redrawn summary of the local hypertriglyceridaemia pathway (aligned with NICE CG181). Verify against the original guideline before relying on thresholds.</p>
+
+  <div class="path" data-tags="triglycerides lipids hypertriglyceridaemia pancreatitis fasting lipid clinic">
+    <div class="pathstep p-start">
+      <span class="band">Non-fasting TG &gt; 4.5 mmol/L</span>
+      <p>Repeat with a <strong>fasting</strong> sample to confirm, and review for secondary causes: alcohol excess, poorly controlled diabetes, hypothyroidism, renal or liver disease, obesity, and drugs (steroids, thiazides, beta-blockers, oestrogens, antipsychotics, retinoids).</p>
+    </div>
+    <div class="pathstep p-mod">
+      <span class="band">Fasting TG 4.5 – 9.9 mmol/L</span>
+      <p>CVD risk is <strong>underestimated by QRISK</strong> at these levels. Optimise lifestyle (alcohol, weight, glycaemic control) and treat secondary causes; manage overall CVD risk (statin per usual criteria). Seek specialist advice if persistently elevated despite this.</p>
+    </div>
+    <div class="pathstep p-high">
+      <span class="band">Fasting TG 10 – 20 mmol/L</span>
+      <p>Repeat fasting measurement after an interval of <strong>5 days but within 2 weeks</strong>; review for secondary causes. If it remains above 10 mmol/L → refer for / seek <strong>specialist (lipid clinic) advice</strong>.</p>
+    </div>
+    <div class="pathstep p-urgent">
+      <span class="band">TG &gt; 20 mmol/L</span>
+      <p><strong>Urgent specialist (lipid clinic) referral</strong> — significant acute pancreatitis risk — unless explained by alcohol excess or poor glycaemic control (address these and re-check promptly). Safety-net for abdominal pain.</p>
+    </div>
+  </div>
+  <div class="note">This is a redrawn aide-memoire, not a reproduction of the source document. Check the local guideline / NICE CG181 for the definitive pathway and referral routes.</div>
+</section>
+
+<footer>
+  Internal reference page. Links open external sites whose content may change; last link-check July 2026. Nothing here replaces clinical judgement, the BNF, or local referral criteria.
+</footer>
+
+</main>
+
+<script>
+(function(){
+  // Copy buttons
+  document.querySelectorAll('.btn.copy').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var text = btn.getAttribute('data-copy');
+      function done(){
+        var old = btn.textContent;
+        btn.textContent = 'Copied ✓';
+        btn.classList.add('done');
+        setTimeout(function(){ btn.textContent = old; btn.classList.remove('done'); }, 1600);
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(done).catch(function(){ fallback(); });
+      } else { fallback(); }
+      function fallback(){
+        var ta = document.createElement('textarea');
+        ta.value = text; ta.style.position='fixed'; ta.style.opacity='0';
+        document.body.appendChild(ta); ta.select();
+        try { document.execCommand('copy'); done(); } catch(e){}
+        document.body.removeChild(ta);
+      }
+    });
+  });
+
+  // Filter
+  var q = document.getElementById('q');
+  var items = Array.prototype.slice.call(document.querySelectorAll('.item, .tablecard, .path'));
+  var sections = Array.prototype.slice.call(document.querySelectorAll('main section'));
+  q.addEventListener('input', function(){
+    var term = q.value.trim().toLowerCase();
+    items.forEach(function(el){
+      var hay = (el.textContent + ' ' + (el.getAttribute('data-tags')||'')).toLowerCase();
+      el.classList.toggle('hidden', term !== '' && hay.indexOf(term) === -1);
+    });
+    sections.forEach(function(sec){
+      var anyVisible = sec.querySelector('.item:not(.hidden), .tablecard:not(.hidden), .path:not(.hidden)');
+      sec.classList.toggle('hidden', term !== '' && !anyVisible);
+    });
+  });
+})();
+</script>
+</body>
+</html>
