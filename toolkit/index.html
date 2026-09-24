@@ -131,6 +131,29 @@
   @media (max-width:560px){
     .actions{width:100%;justify-content:flex-end}
   }
+
+  /* sub-groups inside a section */
+  .group{margin:24px 0 0}
+  section h2 + .group, section .sub + .group{margin-top:10px}
+  .group > h3{font-size:15px;font-weight:700;color:var(--ink);margin:0 0 2px}
+
+  /* richer cards (e.g. CHAT) */
+  .item .desc + .desc{margin-top:8px}
+  .tag{
+    display:inline-block;font-size:11.5px;font-weight:700;letter-spacing:.02em;
+    color:var(--blue-dark);background:#e8f0fa;border:1px solid #c9dbf0;
+    border-radius:5px;padding:2px 7px;margin-left:6px;vertical-align:2px;
+  }
+  ul.chips{list-style:none;margin:8px 0 4px;padding:0;display:flex;flex-wrap:wrap;gap:6px}
+  ul.chips li{
+    font-size:12.5px;font-weight:600;color:var(--ink);background:#eef2f5;
+    border:1px solid var(--line);border-radius:999px;padding:3px 10px;
+  }
+  details.more{margin:10px 0 0;font-size:14px;color:var(--ink-soft)}
+  details.more summary{cursor:pointer;font-weight:600;color:var(--blue)}
+  details.more summary:focus-visible{outline:2px solid var(--blue);outline-offset:2px;border-radius:4px}
+  details.more ul{margin:8px 0 0;padding-left:20px}
+  details.more li{margin:4px 0}
 </style>
 </head>
 <body>
@@ -146,16 +169,16 @@
 
 <div class="controls">
   <div class="inner">
-    <input id="q" type="search" placeholder="Filter resources… (e.g. physio, safeguarding, HRT)" aria-label="Filter resources">
+    <input id="q" type="search" placeholder="Filter resources… (e.g. croup, physio, CBT, HRT)" aria-label="Filter resources">
     <nav class="jump">
       <a href="#urgent">Urgent</a>
-      <a href="#prescribing">Prescribing</a>
-      <a href="#guides">Guides</a>
-      <a href="#referrals">Referrals</a>
+      <a href="#community">Community</a>
       <a href="#mh">Mental health</a>
-      <a href="#ltc">Diabetes &amp; resp</a>
+      <a href="#lifestyle">Lifestyle</a>
+      <a href="#ltc">LTCs</a>
       <a href="#cancer">Cancer</a>
       <a href="#women">Women's health</a>
+      <a href="#guides">Guides</a>
       <a href="#ai">AI tools</a>
       <a href="#hrt">HRT</a>
       <a href="#lipids">Triglycerides</a>
@@ -259,85 +282,64 @@
   </div>
 </section>
 
-<!-- ===================== PRESCRIBING ===================== -->
-<section id="prescribing">
-  <h2>Prescribing &amp; formulary</h2>
+<!-- ===================== COMMUNITY TEAMS & REFERRALS ===================== -->
+<section id="community">
+  <h2>Community teams &amp; referrals</h2>
+  <p class="sub">Local teams and services you can refer into.</p>
 
-  <div class="item" data-tags="hiow formulary medicines traffic light approved restricted prescribing hampshire">
+  <div class="item" data-tags="chat childrens home acute team hhft paediatric paeds children child baby nurses home visits admission avoidance bronchiolitis chest infection chickenpox covid croup gastroenteritis diarrhoea vomiting hand foot mouth otitis media ear infection scarlet fever tonsillitis uti viral induced wheeze viw urti prolonged jaundice screen pjs basingstoke winchester">
     <div class="body">
-      <p class="name">HIOW Joint Medicines Formulary</p>
-      <p class="desc">What's actually stocked, approved or restricted locally — traffic-light status across primary care, hospital, community and mental health providers.</p>
+      <p class="name">CHAT — Children's Home Acute Team <span class="tag">Basingstoke &amp; Winchester</span></p>
+      <p class="desc">Experienced paediatric nurses who look after acutely unwell children at home with phone support and home visits, so they don't need to re-attend or be admitted. Takes referrals from GP practices in North &amp; Mid Hampshire (Hampshire Hospitals).</p>
+      <p class="desc"><strong>Who they see:</strong> the child must be seen face to face and diagnosed by you, referred the <strong>same day</strong>, and meet <strong>amber</strong> criteria on the Wessex Healthier Together pathway for one of:</p>
+      <ul class="chips">
+        <li>Bronchiolitis</li>
+        <li>Chest infection</li>
+        <li>Chickenpox</li>
+        <li>COVID</li>
+        <li>Croup</li>
+        <li>Gastroenteritis</li>
+        <li>Hand, foot &amp; mouth</li>
+        <li>Otitis media</li>
+        <li>Scarlet fever</li>
+        <li>Tonsillitis</li>
+        <li>UTI (over 6 months)</li>
+        <li>Viral-induced wheeze (1–9 years)</li>
+        <li>Viral URTI</li>
+      </ul>
+      <p class="desc">They also do prolonged jaundice screen (PJS) bloods at home, on referral from midwives, health visitors and GPs.</p>
+      <p class="desc"><strong>To refer, phone:</strong> Basingstoke <span class="tel">07785 283846</span> · Winchester <span class="tel">07884 090739</span><br>
+      Mon–Fri 08:00–20:00, Sat–Sun 09:00–17:00. If the line is busy, email <span class="tel">CHAT@hhft.nhs.uk</span>. Always include observations.</p>
+      <details class="more">
+        <summary>What happens next, and tips before referring</summary>
+        <ul>
+          <li>CHAT contact the family within 2 hours of referral (during opening hours): nursing assessment plus advice on fever, fluids, breathing and medicines — by phone, home visit, or into the hospital assessment unit if needed.</li>
+          <li>Children stay on the caseload for about 3 days on average, and are discharged once improving or after 48+ hours with no contact. Families get their own parent line, covered 24/7 (diverted to the hospital ward out of hours).</li>
+          <li>CHAT may redirect you to paediatrics, or hand back to the GP if a new, unrelated problem comes up or a medical review is needed but the child isn't unwell enough for hospital.</li>
+          <li>Ask parents whether they want a CHAT referral — it's optional.</li>
+          <li>Gastroenteritis: check a BM, even in babies.</li>
+          <li>Drinking less than 50% of normal: start a fluid challenge before referring — CHAT will follow it up.</li>
+          <li>Viral-induced wheeze: give the Healthier Together wheeze leaflet. Some 6–9-year-olds now follow a MART plan (Symbicort Turbohaler 100/6) instead of the salbutamol weaning plan.</li>
+          <li>Under 1 year: inhalers aren't effective — if you think one is needed, discuss with paediatrics before referring.</li>
+        </ul>
+      </details>
     </div>
     <div class="actions">
-      <a class="btn open" href="https://www.hiowformulary.nhs.uk/default.asp?siteType=Full" target="_blank" rel="noopener">Open</a>
-      <button class="btn copy" data-copy="Hampshire & Isle of Wight Joint Medicines Formulary: https://www.hiowformulary.nhs.uk/default.asp?siteType=Full">Copy</button>
-    </div>
-  </div>
-</section>
-
-<!-- ===================== GUIDES ===================== -->
-<section id="guides">
-  <h2>Guides &amp; handbooks</h2>
-
-  <div class="item" data-tags="cesel guides general medical clinical effectiveness south east london">
-    <div class="body">
-      <p class="name">CESEL guides</p>
-      <p class="desc">Clinical Effectiveness South East London — concise, practical primary-care guides across most general medical topics.</p>
-    </div>
-    <div class="actions">
-      <a class="btn open" href="https://www.selondonics.org/icb/healthcare-professionals/cesel/guides/" target="_blank" rel="noopener">Open</a>
-      <button class="btn copy" data-copy="CESEL guides (Clinical Effectiveness South East London — primary care guides): https://www.selondonics.org/icb/healthcare-professionals/cesel/guides/">Copy</button>
-    </div>
-  </div>
-
-  <div class="item" data-tags="green book palliative care handbook ruh symptom control end of life">
-    <div class="body">
-      <p class="name">The Green Book — Palliative Care Handbook (RUH)</p>
-      <p class="desc">Symptom control doses, syringe drivers and end-of-life prescribing in one PDF.</p>
-    </div>
-    <div class="actions">
-      <a class="btn open" href="https://www.ruh.nhs.uk/for_clinicians/departments_ruh/palliative_care/documents/palliative_care_handbook.pdf" target="_blank" rel="noopener">Open PDF</a>
-      <button class="btn copy" data-copy="Palliative Care Handbook ('Green Book', RUH): https://www.ruh.nhs.uk/for_clinicians/departments_ruh/palliative_care/documents/palliative_care_handbook.pdf">Copy</button>
-    </div>
-  </div>
-
-  <div class="item" data-tags="death certification coroner referral wessex lmc medical examiner mccd">
-    <div class="body">
-      <p class="name">Death certification &amp; coroner referral — Wessex LMCs</p>
-      <p class="desc">Current process (medical examiner system, MCCD, when coroner notification is required) with decision-making flowchart.</p>
-    </div>
-    <div class="actions">
-      <a class="btn open" href="https://www.wessexlmcs.com/guidance/death-certification-from-9th-sep/" target="_blank" rel="noopener">Open</a>
-      <button class="btn copy" data-copy="Wessex LMCs death certification & coroner referral guidance: https://www.wessexlmcs.com/guidance/death-certification-from-9th-sep/">Copy</button>
+      <a class="btn open" href="https://www.hampshirehospitals.nhs.uk/our-services/az-departments-and-specialties/child-health-services-paediatrics-1/childrens-home-acute-team-chat" target="_blank" rel="noopener">Open</a>
+      <button class="btn copy" data-copy="CHAT (Children's Home Acute Team, Hampshire Hospitals) — refer same day after face-to-face review, child meeting amber criteria; include obs. Basingstoke 07785 283846 / Winchester 07884 090739 (Mon–Fri 08:00–20:00, Sat–Sun 09:00–17:00). If busy, email CHAT@hhft.nhs.uk">Copy</button>
     </div>
   </div>
 
-  <div class="item" data-tags="asthma gina guidelines respiratory">
+  <div class="item" data-tags="frailty team referral older people elderly frail community">
     <div class="body">
-      <p class="name">GINA — Global Initiative for Asthma</p>
-      <p class="desc">Current GINA strategy report and pocket guides for asthma diagnosis and stepwise management.</p>
+      <p class="name">Frailty team referrals</p>
+      <p class="desc">Referral line <span class="tel">0300 121 2594</span>.</p>
     </div>
     <div class="actions">
-      <a class="btn open" href="https://ginasthma.org" target="_blank" rel="noopener">Open</a>
-      <button class="btn copy" data-copy="GINA asthma guidelines: https://ginasthma.org">Copy</button>
+      <a class="btn open" href="tel:03001212594">Call</a>
+      <button class="btn copy" data-copy="Frailty team referrals: 0300 121 2594">Copy</button>
     </div>
   </div>
-
-  <div class="item" data-tags="dermatology pcds primary care dermatological society skin rash">
-    <div class="body">
-      <p class="name">PCDS — Primary Care Dermatology Society</p>
-      <p class="desc">A–Z of skin conditions with photos and primary-care management guidance.</p>
-    </div>
-    <div class="actions">
-      <a class="btn open" href="https://www.pcds.org.uk" target="_blank" rel="noopener">Open</a>
-      <button class="btn copy" data-copy="Primary Care Dermatology Society (A–Z of skin conditions): https://www.pcds.org.uk">Copy</button>
-    </div>
-  </div>
-</section>
-
-<!-- ===================== REFERRALS & LOCAL SERVICES ===================== -->
-<section id="referrals">
-  <h2>Referrals &amp; local services</h2>
 
   <div class="item" data-tags="physiotherapy msk self referral hiow physio musculoskeletal">
     <div class="body">
@@ -350,37 +352,123 @@
     </div>
   </div>
 
-  <div class="item" data-tags="cfs me fatigue south coast referral chronic fatigue">
+  <div class="item" data-tags="adult social care county council hampshire support">
     <div class="body">
-      <p class="name">South Coast Fatigue — ME/CFS service</p>
-      <p class="desc">NHS-commissioned service for mild–moderate ME/CFS, age 16+, Hampshire &amp; IOW. GP or consultant referral only; diagnosis must be made (and screening bloods done) before referral.</p>
+      <p class="name">Adult social care — Hampshire County Council</p>
+      <p class="desc">Care needs assessments, care at home, Connect to Support directory and contact routes.</p>
     </div>
     <div class="actions">
-      <a class="btn open" href="https://southcoastfatigue.co.uk" target="_blank" rel="noopener">Open</a>
-      <button class="btn copy" data-copy="South Coast Fatigue (NHS ME/CFS service for Hampshire & IOW, mild–moderate, 16+, GP/consultant referral after diagnosis): https://southcoastfatigue.co.uk">Copy</button>
+      <a class="btn open" href="https://www.hants.gov.uk/socialcareandhealth/adultsocialcare" target="_blank" rel="noopener">Open</a>
+      <button class="btn copy" data-copy="Hampshire County Council adult social care: https://www.hants.gov.uk/socialcareandhealth/adultsocialcare">Copy</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== MENTAL HEALTH ===================== -->
+<section id="mh">
+  <h2>Mental health</h2>
+  <p class="sub">Talking therapies aren't crisis services. Urgent mental health help: NHS 111, mental health option. Immediate risk to life: 999.</p>
+
+  <div class="group">
+    <h3>Adults (16+)</h3>
+
+  <div class="item" data-tags="italk nhs talking therapies hampshire cbt counselling guided self help anxiety depression low mood stress ptsd ocd self referral">
+    <div class="body">
+      <p class="name">italk — NHS Talking Therapies Hampshire</p>
+      <p class="desc">Free NHS CBT, counselling for depression and guided self-help for anxiety, low mood, stress, PTSD and OCD; age 16+. Patients self-refer online (or call <span class="tel">023 8038 3920</span> for help referring). Professional referrals: form to <span class="tel">hiowh.tth.referrals@nhs.net</span>. For online CBT without waiting for an assessment, see SilverCloud below.</p>
+    </div>
+    <div class="actions">
+      <a class="btn open" href="https://www.talkingtherapieshiow.nhs.uk/hampshire" target="_blank" rel="noopener">Open</a>
+      <button class="btn copy" data-copy="italk (NHS Talking Therapies Hampshire) — free NHS talking therapies for anxiety, low mood and stress, age 16+. Self-refer online at https://www.talkingtherapieshiow.nhs.uk/hampshire or call 023 8038 3920">Copy</button>
     </div>
   </div>
 
-  <div class="item" data-tags="home oxygen vivisol hoof respiratory">
+  <div class="item" data-tags="silvercloud online cbt digital computerised self help anxiety depression low mood stress panic sleep money worries no assessment waiting list italk talking therapies">
     <div class="body">
-      <p class="name">Home oxygen — Vivisol</p>
-      <p class="desc">Regional home oxygen provider. Order via HOOF Part A for non-specialist/temporary supply. Oxygen enquiries <span class="tel">0800 833 531</span>; patient line <span class="tel">0800 917 9840</span>.</p>
+      <p class="name">SilverCloud — online CBT, start straight away</p>
+      <p class="desc">Free NHS online CBT through italk. Patients sign up themselves and can start the same day — no assessment, so no wait for the italk assessment list (a supporter can take a few weeks to be allocated). Programmes for anxiety, depression, panic, stress, sleep and money worries, plus versions for anxiety or low mood alongside heart disease, diabetes or lung conditions. Age 16+.</p>
     </div>
     <div class="actions">
-      <a class="btn open" href="https://www.vivisol.co.uk/services/healthcare-professionals/" target="_blank" rel="noopener">Open</a>
-      <button class="btn copy" data-copy="Vivisol home oxygen (HOOF ordering; enquiries 0800 833 531, patient support 0800 917 9840): https://www.vivisol.co.uk/services/healthcare-professionals/">Copy</button>
+      <a class="btn open" href="https://italk.silvercloudhealth.com/signup/" target="_blank" rel="noopener">Sign up</a>
+      <button class="btn copy" data-copy="SilverCloud — free NHS online CBT for anxiety, low mood, stress, panic and sleep (via NHS Talking Therapies Hampshire). Sign up and start straight away, no assessment needed: https://italk.silvercloudhealth.com/signup/">Copy</button>
+    </div>
+  </div>
+  </div>
+
+  <div class="group">
+    <h3>Children &amp; young people</h3>
+
+  <div class="item" data-tags="eycs youth counselling children young people 11-19 free">
+    <div class="body">
+      <p class="name">EYCS — youth counselling service <span class="tag">11–19</span></p>
+      <p class="desc">Free, confidential 1:1 counselling for 11–19s in the borough and southern parishes (venues include local GP surgeries and community centres); 6 sessions. Referral form on their site.</p>
+    </div>
+    <div class="actions">
+      <a class="btn open" href="https://www.eycs.co.uk" target="_blank" rel="noopener">Open</a>
+      <button class="btn copy" data-copy="EYCS — free confidential counselling for 11–19 year olds (6 sessions, self/parent/professional referral): https://www.eycs.co.uk">Copy</button>
     </div>
   </div>
 
-  <div class="item" data-tags="frailty team referral community">
+  <div class="item" data-tags="no limits young people youth counselling advice drop in support southampton hampshire 16 25">
     <div class="body">
-      <p class="name">Frailty team referrals <span class="flag">verify number</span></p>
-      <p class="desc">Number supplied as <span class="tel">0400 121 2594</span> — this isn't a valid UK dialling code (04 range doesn't exist), so it's likely a typo (0300…?). Confirm from the practice directory and correct here.</p>
+      <p class="name">No Limits — young people's support <span class="tag">16–25</span></p>
+      <p class="desc">Free counselling, advice and drop-in support for young people aged 16 to 25 across Southampton and Hampshire.</p>
     </div>
     <div class="actions">
-      <button class="btn copy" data-copy="Frailty team referrals: [NUMBER TO CONFIRM — 0400 121 2594 as written is not a valid UK number]">Copy</button>
+      <a class="btn open" href="https://nolimitshelp.org.uk" target="_blank" rel="noopener">Open</a>
+      <button class="btn copy" data-copy="No Limits — free counselling, advice and support for young people aged 16–25: https://nolimitshelp.org.uk">Copy</button>
     </div>
   </div>
+  </div>
+
+  <div class="group">
+    <h3>ADHD &amp; autism</h3>
+
+  <div class="item" data-tags="adhd autism asd neurodevelopmental neurodiversity questionnaire screening forms email asrs aq10 aq-10 snap iv">
+    <div class="body">
+      <p class="name">ADHD &amp; autism questionnaires <span class="flag">internal</span></p>
+      <p class="desc">Screening questionnaires are held on practice email. Standard tools: ASRS (adult ADHD), AQ-10 (adult autism), SNAP-IV (child ADHD).</p>
+    </div>
+    <div class="actions">
+      <button class="btn copy" data-copy="ADHD & autism screening questionnaires: on practice email (ASRS / AQ-10 / SNAP-IV)">Copy</button>
+    </div>
+  </div>
+  </div>
+</section>
+
+<!-- ===================== LIFESTYLE CHANGES ===================== -->
+<section id="lifestyle">
+  <h2>Lifestyle changes</h2>
+  <p class="sub">Stopping smoking, cutting down alcohol or drugs, getting active and preventing falls. Most accept self-referral.</p>
+
+  <div class="group">
+    <h3>Smoking, alcohol &amp; drugs</h3>
+
+  <div class="item" data-tags="smoking cessation smokefree hampshire quit nrt vape stop">
+    <div class="body">
+      <p class="name">Smokefree Hampshire — stop smoking service</p>
+      <p class="desc">Free 12-week 1:1 support with NRT or vape allowance; self-referral or professional referral. Covers Hampshire (excludes Southampton and Portsmouth city residents).</p>
+    </div>
+    <div class="actions">
+      <a class="btn open" href="https://smokefreehampshire.co.uk" target="_blank" rel="noopener">Open</a>
+      <button class="btn copy" data-copy="Smokefree Hampshire — free stop smoking support (12 weeks 1:1 + NRT/vape; self-refer online): https://smokefreehampshire.co.uk (professional referrals: https://www.smokefreehampshire.co.uk/make-a-referral/)">Copy</button>
+    </div>
+  </div>
+
+  <div class="item" data-tags="drugs alcohol recovery inclusion addiction detox nhs confidential">
+    <div class="body">
+      <p class="name">Inclusion Recovery Hampshire — drug &amp; alcohol service</p>
+      <p class="desc">Free, confidential NHS recovery service (25+; under-25s via Hampshire 24/7 on the same number). Self-referral or GP referral. <span class="tel">0300 124 0103</span>. Local hub: 41 High Street, SO50 5LG.</p>
+    </div>
+    <div class="actions">
+      <a class="btn open" href="https://www.inclusionhants.org" target="_blank" rel="noopener">Open</a>
+      <button class="btn copy" data-copy="Inclusion Recovery Hampshire — free, confidential NHS drug & alcohol recovery service. Tel 0300 124 0103. Local hub: 41 High Street, Eastleigh SO50 5LG. Self-referral online: https://www.inclusionhants.org">Copy</button>
+    </div>
+  </div>
+  </div>
+
+  <div class="group">
+    <h3>Activity &amp; falls prevention</h3>
 
   <div class="item" data-tags="steady strong balance falls prevention classes mobility walking support hampshire">
     <div class="body">
@@ -414,92 +502,16 @@
       <button class="btn copy" data-copy="Southampton wellbeing walks (free led walks, all levels): https://myjourneysouthampton.com/walk/southampton-walking-opportunities/">Copy</button>
     </div>
   </div>
-
-  <div class="item" data-tags="smoking cessation smokefree hampshire quit nrt vape stop">
-    <div class="body">
-      <p class="name">Smokefree Hampshire — stop smoking service</p>
-      <p class="desc">Free 12-week 1:1 support with NRT or vape allowance; self-referral or professional referral. Covers Hampshire (excludes Southampton and Portsmouth city residents).</p>
-    </div>
-    <div class="actions">
-      <a class="btn open" href="https://smokefreehampshire.co.uk" target="_blank" rel="noopener">Open</a>
-      <button class="btn copy" data-copy="Smokefree Hampshire — free stop smoking support (12 weeks 1:1 + NRT/vape; self-refer online): https://smokefreehampshire.co.uk (professional referrals: https://www.smokefreehampshire.co.uk/make-a-referral/)">Copy</button>
-    </div>
-  </div>
-
-  <div class="item" data-tags="drugs alcohol recovery inclusion addiction detox nhs confidential">
-    <div class="body">
-      <p class="name">Inclusion Recovery Hampshire — drug &amp; alcohol service</p>
-      <p class="desc">Free, confidential NHS recovery service (25+; under-25s via Hampshire 24/7 on the same number). Self-referral or GP referral. <span class="tel">0300 124 0103</span>. Local hub: 41 High Street, SO50 5LG.</p>
-    </div>
-    <div class="actions">
-      <a class="btn open" href="https://www.inclusionhants.org" target="_blank" rel="noopener">Open</a>
-      <button class="btn copy" data-copy="Inclusion Recovery Hampshire — free, confidential NHS drug & alcohol recovery service. Tel 0300 124 0103. Local hub: 41 High Street, Eastleigh SO50 5LG. Self-referral online: https://www.inclusionhants.org">Copy</button>
-    </div>
-  </div>
-
-  <div class="item" data-tags="adult social care county council hampshire support">
-    <div class="body">
-      <p class="name">Adult social care — Hampshire County Council</p>
-      <p class="desc">Care needs assessments, care at home, Connect to Support directory and contact routes.</p>
-    </div>
-    <div class="actions">
-      <a class="btn open" href="https://www.hants.gov.uk/socialcareandhealth/adultsocialcare" target="_blank" rel="noopener">Open</a>
-      <button class="btn copy" data-copy="Hampshire County Council adult social care: https://www.hants.gov.uk/socialcareandhealth/adultsocialcare">Copy</button>
-    </div>
   </div>
 </section>
 
-<!-- ===================== MENTAL HEALTH ===================== -->
-<section id="mh">
-  <h2>Mental health</h2>
-
-  <div class="item" data-tags="italk cbt talking therapies anxiety depression self referral nhs">
-    <div class="body">
-      <p class="name">italk — NHS Talking Therapies (CBT)</p>
-      <p class="desc">Self-referral for adults in Hampshire with anxiety, low mood, stress; CBT and guided self-help.</p>
-    </div>
-    <div class="actions">
-      <a class="btn open" href="https://www.italk.org.uk" target="_blank" rel="noopener">Open</a>
-      <button class="btn copy" data-copy="italk — free NHS talking therapies for anxiety and low mood (self-referral online): https://www.italk.org.uk">Copy</button>
-    </div>
-  </div>
-
-  <div class="item" data-tags="eycs youth counselling children young people 11-19 free">
-    <div class="body">
-      <p class="name">EYCS — youth counselling service</p>
-      <p class="desc">Free, confidential 1:1 counselling for 11–19s in the borough and southern parishes (venues include local GP surgeries and community centres); 6 sessions. Referral form on their site.</p>
-    </div>
-    <div class="actions">
-      <a class="btn open" href="https://www.eycs.co.uk" target="_blank" rel="noopener">Open</a>
-      <button class="btn copy" data-copy="EYCS — free confidential counselling for 11–19 year olds (6 sessions, self/parent/professional referral): https://www.eycs.co.uk">Copy</button>
-    </div>
-  </div>
-
-  <div class="item" data-tags="no limits children young people counselling support southampton hampshire">
-    <div class="body">
-      <p class="name">No Limits — children &amp; young people's support</p>
-      <p class="desc">Free counselling, advice and drop-in support for under-26s across Southampton and Hampshire.</p>
-    </div>
-    <div class="actions">
-      <a class="btn open" href="https://nolimitshelp.org.uk" target="_blank" rel="noopener">Open</a>
-      <button class="btn copy" data-copy="No Limits — free support and counselling for children and young people (under 26): https://nolimitshelp.org.uk">Copy</button>
-    </div>
-  </div>
-
-  <div class="item" data-tags="adhd autism questionnaire forms email asrs snap">
-    <div class="body">
-      <p class="name">ADHD &amp; autism questionnaires <span class="flag">internal</span></p>
-      <p class="desc">Currently held on practice email. If wanted, the standard freely-licensed instruments (e.g. ASRS, AQ-10, SNAP-IV) could be linked here directly instead — say the word.</p>
-    </div>
-    <div class="actions">
-      <button class="btn copy" data-copy="ADHD & autism screening questionnaires: on practice email (templates: ASRS / AQ-10 / SNAP-IV)">Copy</button>
-    </div>
-  </div>
-</section>
-
-<!-- ===================== DIABETES & RESPIRATORY ===================== -->
+<!-- ===================== LONG-TERM CONDITIONS ===================== -->
 <section id="ltc">
-  <h2>Diabetes &amp; respiratory</h2>
+  <h2>Long-term conditions</h2>
+
+  <div class="group">
+    <h3>Diabetes</h3>
+
   <div class="item" data-tags="west north hampshire community diabetes service southern health hiow specialist nurses referral advice insulin libre wiser">
     <div class="body">
       <p class="name">West &amp; North Hampshire Community Diabetes Service</p>
@@ -545,6 +557,10 @@
       <button class="btn copy" data-copy="Diabetes UK — information and support for people with diabetes: https://www.diabetes.org.uk">Copy</button>
     </div>
   </div>
+  </div>
+
+  <div class="group">
+    <h3>Respiratory</h3>
 
   <div class="item" data-tags="asthma lung uk copd respiratory support patient">
     <div class="body">
@@ -555,6 +571,44 @@
       <a class="btn open" href="https://www.asthmaandlung.org.uk" target="_blank" rel="noopener">Open</a>
       <button class="btn copy" data-copy="Asthma + Lung UK — support and information for lung conditions: https://www.asthmaandlung.org.uk">Copy</button>
     </div>
+  </div>
+
+  <div class="item" data-tags="asthma gina guidelines respiratory">
+    <div class="body">
+      <p class="name">GINA — Global Initiative for Asthma</p>
+      <p class="desc">Current GINA strategy report and pocket guides for asthma diagnosis and stepwise management.</p>
+    </div>
+    <div class="actions">
+      <a class="btn open" href="https://ginasthma.org" target="_blank" rel="noopener">Open</a>
+      <button class="btn copy" data-copy="GINA asthma guidelines: https://ginasthma.org">Copy</button>
+    </div>
+  </div>
+
+  <div class="item" data-tags="home oxygen vivisol hoof respiratory">
+    <div class="body">
+      <p class="name">Home oxygen — Vivisol</p>
+      <p class="desc">Regional home oxygen provider. Order via HOOF Part A for non-specialist/temporary supply. Oxygen enquiries <span class="tel">0800 833 531</span>; patient line <span class="tel">0800 917 9840</span>.</p>
+    </div>
+    <div class="actions">
+      <a class="btn open" href="https://www.vivisol.co.uk/services/healthcare-professionals/" target="_blank" rel="noopener">Open</a>
+      <button class="btn copy" data-copy="Vivisol home oxygen (HOOF ordering; enquiries 0800 833 531, patient support 0800 917 9840): https://www.vivisol.co.uk/services/healthcare-professionals/">Copy</button>
+    </div>
+  </div>
+  </div>
+
+  <div class="group">
+    <h3>ME/CFS</h3>
+
+  <div class="item" data-tags="cfs me fatigue south coast referral chronic fatigue">
+    <div class="body">
+      <p class="name">South Coast Fatigue — ME/CFS service</p>
+      <p class="desc">NHS-commissioned service for mild–moderate ME/CFS, age 16+, Hampshire &amp; IOW. GP or consultant referral only; diagnosis must be made (and screening bloods done) before referral.</p>
+    </div>
+    <div class="actions">
+      <a class="btn open" href="https://southcoastfatigue.co.uk" target="_blank" rel="noopener">Open</a>
+      <button class="btn copy" data-copy="South Coast Fatigue (NHS ME/CFS service for Hampshire & IOW, mild–moderate, 16+, GP/consultant referral after diagnosis): https://southcoastfatigue.co.uk">Copy</button>
+    </div>
+  </div>
   </div>
 </section>
 
@@ -608,6 +662,66 @@
     <div class="actions">
       <a class="btn open" href="https://www.bpas.org" target="_blank" rel="noopener">Open</a>
       <button class="btn copy" data-copy="BPAS — abortion care and pregnancy counselling (self-referral, NHS funded): https://www.bpas.org — booking 03457 30 40 30">Copy</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== GUIDES, PRESCRIBING & ADMIN ===================== -->
+<section id="guides">
+  <h2>Guides, prescribing &amp; admin</h2>
+
+  <div class="item" data-tags="hiow formulary medicines traffic light approved restricted prescribing hampshire">
+    <div class="body">
+      <p class="name">HIOW Joint Medicines Formulary</p>
+      <p class="desc">What's actually stocked, approved or restricted locally — traffic-light status across primary care, hospital, community and mental health providers.</p>
+    </div>
+    <div class="actions">
+      <a class="btn open" href="https://www.hiowformulary.nhs.uk/default.asp?siteType=Full" target="_blank" rel="noopener">Open</a>
+      <button class="btn copy" data-copy="Hampshire & Isle of Wight Joint Medicines Formulary: https://www.hiowformulary.nhs.uk/default.asp?siteType=Full">Copy</button>
+    </div>
+  </div>
+
+  <div class="item" data-tags="cesel guides general medical clinical effectiveness south east london">
+    <div class="body">
+      <p class="name">CESEL guides</p>
+      <p class="desc">Clinical Effectiveness South East London — concise, practical primary-care guides across most general medical topics.</p>
+    </div>
+    <div class="actions">
+      <a class="btn open" href="https://www.selondonics.org/icb/healthcare-professionals/cesel/guides/" target="_blank" rel="noopener">Open</a>
+      <button class="btn copy" data-copy="CESEL guides (Clinical Effectiveness South East London — primary care guides): https://www.selondonics.org/icb/healthcare-professionals/cesel/guides/">Copy</button>
+    </div>
+  </div>
+
+  <div class="item" data-tags="dermatology pcds primary care dermatological society skin rash">
+    <div class="body">
+      <p class="name">PCDS — Primary Care Dermatology Society</p>
+      <p class="desc">A–Z of skin conditions with photos and primary-care management guidance.</p>
+    </div>
+    <div class="actions">
+      <a class="btn open" href="https://www.pcds.org.uk" target="_blank" rel="noopener">Open</a>
+      <button class="btn copy" data-copy="Primary Care Dermatology Society (A–Z of skin conditions): https://www.pcds.org.uk">Copy</button>
+    </div>
+  </div>
+
+  <div class="item" data-tags="green book palliative care handbook ruh symptom control end of life">
+    <div class="body">
+      <p class="name">The Green Book — Palliative Care Handbook (RUH)</p>
+      <p class="desc">Symptom control doses, syringe drivers and end-of-life prescribing in one PDF.</p>
+    </div>
+    <div class="actions">
+      <a class="btn open" href="https://www.ruh.nhs.uk/for_clinicians/departments_ruh/palliative_care/documents/palliative_care_handbook.pdf" target="_blank" rel="noopener">Open PDF</a>
+      <button class="btn copy" data-copy="Palliative Care Handbook ('Green Book', RUH): https://www.ruh.nhs.uk/for_clinicians/departments_ruh/palliative_care/documents/palliative_care_handbook.pdf">Copy</button>
+    </div>
+  </div>
+
+  <div class="item" data-tags="death certification coroner referral wessex lmc medical examiner mccd">
+    <div class="body">
+      <p class="name">Death certification &amp; coroner referral — Wessex LMCs</p>
+      <p class="desc">Current process (medical examiner system, MCCD, when coroner notification is required) with decision-making flowchart.</p>
+    </div>
+    <div class="actions">
+      <a class="btn open" href="https://www.wessexlmcs.com/guidance/death-certification-from-9th-sep/" target="_blank" rel="noopener">Open</a>
+      <button class="btn copy" data-copy="Wessex LMCs death certification & coroner referral guidance: https://www.wessexlmcs.com/guidance/death-certification-from-9th-sep/">Copy</button>
     </div>
   </div>
 </section>
@@ -785,12 +899,17 @@
   // Filter
   var q = document.getElementById('q');
   var items = Array.prototype.slice.call(document.querySelectorAll('.item, .tablecard, .path'));
+  var groups = Array.prototype.slice.call(document.querySelectorAll('main .group'));
   var sections = Array.prototype.slice.call(document.querySelectorAll('main section'));
   q.addEventListener('input', function(){
     var term = q.value.trim().toLowerCase();
     items.forEach(function(el){
       var hay = (el.textContent + ' ' + (el.getAttribute('data-tags')||'')).toLowerCase();
       el.classList.toggle('hidden', term !== '' && hay.indexOf(term) === -1);
+    });
+    groups.forEach(function(g){
+      var anyVisible = g.querySelector('.item:not(.hidden), .tablecard:not(.hidden), .path:not(.hidden)');
+      g.classList.toggle('hidden', term !== '' && !anyVisible);
     });
     sections.forEach(function(sec){
       var anyVisible = sec.querySelector('.item:not(.hidden), .tablecard:not(.hidden), .path:not(.hidden)');
